@@ -1,0 +1,160 @@
+<!--<div>-->
+<!--  <ul *ngIf="news">-->
+<!--    <li *ngFor="let n of news">-->
+<!--      <img src="{{this.backendUrl + '/'+n.images.filePath}}" alt="">-->
+<!--      <h4><a [routerLink]="['/single-news', n._id]">{{n.title}}</a></h4>-->
+<!--      <p>{{n.shortDescription}}</p>-->
+<!--      <p>{{n.createdAt | date}}</p>-->
+
+<!--    </li>-->
+<!--  </ul>-->
+<!--</div>-->
+
+<section id="news" class="uk-news--section">
+  <div class="container">
+    <div class="uk-section-heading">
+      <h2 class="uk-section-title">
+        ՆՈՐՈՒԹՅՈՒՆՆԵՐ
+      </h2>
+    </div>
+  </div>
+  <div class=" uk-news--section-bg" style="background-image: url('../../../assets/images/news/NEWS.png')">
+    <div class="container">
+      <div class="row uk-row" *ngIf="news">
+        <div class="col-lg-4 col-md-6"  *ngFor="let n of news">
+          <div class="uk-news--box uk-box-shadow">
+            <div class="uk-news--head" style="background-image: url({{this.backendUrl + '/'+n.images.filePath}})"></div>
+            <div class="uk-news--body">
+              <p [innerHTML]="n.shortDescription">
+              </p>
+            </div>
+            <div class="uk-news--footer">
+              <div class="uk-news--date">
+                <i class="fa fa-calendar-o"></i>
+                {{n.createdAt | date: 'MM/dd/yyyy'}}
+              </div>
+              <div class="uk-news--more">
+                <a class="uk-news--more-link" [routerLink]="['/single-news', n._id]">
+                  <i class="fa fa-angle-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+<!--        <div class="col-lg-4 col-md-6">-->
+<!--          <div class="uk-news&#45;&#45;box uk-box-shadow">-->
+<!--            <div class="uk-news&#45;&#45;head" style="background-image: url('../../../assets/images/news/jpg2-news.jpg')"></div>-->
+<!--            <div class="uk-news&#45;&#45;body">-->
+<!--              <p>-->
+<!--                Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--                չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--              </p>-->
+<!--            </div>-->
+<!--            <div class="uk-news&#45;&#45;footer">-->
+<!--              <div class="uk-news&#45;&#45;date">-->
+<!--                <i class="fa fa-calendar-o"></i>-->
+<!--                Ավարտ Հունիսի 26.2020-->
+<!--              </div>-->
+<!--              <div class="uk-news&#45;&#45;more">-->
+<!--                <a class="uk-news&#45;&#45;more-link" href="/single-news.html">-->
+<!--                  <i class="fa fa-angle-right"></i>-->
+<!--                </a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-6">-->
+<!--          <div class="uk-news&#45;&#45;box uk-box-shadow">-->
+<!--            <div class="uk-news&#45;&#45;head" style="background-image: url('../../../assets/images/news/jpg3-news.jpg')"></div>-->
+<!--            <div class="uk-news&#45;&#45;body">-->
+<!--              <p>-->
+<!--                Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--                չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--              </p>-->
+<!--            </div>-->
+<!--            <div class="uk-news&#45;&#45;footer">-->
+<!--              <div class="uk-news&#45;&#45;date">-->
+<!--                <i class="fa fa-calendar-o"></i>-->
+<!--                Ավարտ Հունիսի 26.2020-->
+<!--              </div>-->
+<!--              <div class="uk-news&#45;&#45;more">-->
+<!--                <a class="uk-news&#45;&#45;more-link" href="/single-news.html">-->
+<!--                  <i class="fa fa-angle-right"></i>-->
+<!--                </a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-6">-->
+<!--          <div class="uk-news&#45;&#45;box uk-box-shadow">-->
+<!--            <div class="uk-news&#45;&#45;head" style="background-image: url('../../../assets/images/news/jpg4-news.jpg')"></div>-->
+<!--            <div class="uk-news&#45;&#45;body">-->
+<!--              <p>-->
+<!--                Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--                չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--              </p>-->
+<!--            </div>-->
+<!--            <div class="uk-news&#45;&#45;footer">-->
+<!--              <div class="uk-news&#45;&#45;date">-->
+<!--                <i class="fa fa-calendar-o"></i>-->
+<!--                Ավարտ Հունիսի 26.2020-->
+<!--              </div>-->
+<!--              <div class="uk-news&#45;&#45;more">-->
+<!--                <a class="uk-news&#45;&#45;more-link" href="/single-news.html">-->
+<!--                  <i class="fa fa-angle-right"></i>-->
+<!--                </a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-6">-->
+<!--          <div class="uk-news&#45;&#45;box uk-box-shadow">-->
+<!--            <div class="uk-news&#45;&#45;head" style="background-image: url('../../../assets/images/news/jpg5-news.jpg')"></div>-->
+<!--            <div class="uk-news&#45;&#45;body">-->
+<!--              <p>-->
+<!--                Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--                չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--              </p>-->
+<!--            </div>-->
+<!--            <div class="uk-news&#45;&#45;footer">-->
+<!--              <div class="uk-news&#45;&#45;date">-->
+<!--                <i class="fa fa-calendar-o"></i>-->
+<!--                Ավարտ Հունիսի 26.2020-->
+<!--              </div>-->
+<!--              <div class="uk-news&#45;&#45;more">-->
+<!--                <a class="uk-news&#45;&#45;more-link" href="/single-news.html">-->
+<!--                  <i class="fa fa-angle-right"></i>-->
+<!--                </a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-lg-4 col-md-6">-->
+<!--          <div class="uk-news&#45;&#45;box uk-box-shadow">-->
+<!--            <div class="uk-news&#45;&#45;head">-->
+
+<!--            </div>-->
+<!--            <div class="uk-news&#45;&#45;body">-->
+<!--              <p>-->
+<!--                Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--                չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--              </p>-->
+<!--            </div>-->
+<!--            <div class="uk-news&#45;&#45;footer">-->
+<!--              <div class="uk-news&#45;&#45;date">-->
+<!--                <i class="fa fa-calendar-o"></i>-->
+<!--                Ավարտ Հունիսի 26.2020-->
+<!--              </div>-->
+<!--              <div class="uk-news&#45;&#45;more">-->
+<!--                <a class="uk-news&#45;&#45;more-link" href="">-->
+<!--                  <i class="fa fa-angle-right"></i>-->
+<!--                </a>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+      </div>
+    </div>
+  </div>
+</section>

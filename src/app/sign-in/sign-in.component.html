@@ -1,1 +1,122 @@
-<p>sign-in works!</p>
+<div class="uk-login-main vh-100">
+  <div class="uk-login-box uk-box-shadow bottom-bg login-bg">
+    <div class="uk-login-box--head">
+      <div class="text-center">
+        <a class="uk-login-box--logo" [routerLink]="['/']">
+          <img src="../../assets/images/Logo%20red.png" alt=""/>
+        </a>
+      </div>
+      <ul class="uk-login-box--nav">
+        <li class="active">
+          <a href="javascript:void(0)">Մուտք</a>
+        </li>
+        <li>
+          <a [routerLink]="['/sign-up']">Գրանցվել</a>
+        </li>
+      </ul>
+    </div>
+    <div *ngIf="!forgotPassword && !verifySms && !confirmPass" class="uk-login-box--form">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input [ngClass]=" error.phoneNumber.bool ? 'border-red' : ''"
+                     (input)="validatePhone()" placeholder="Հեռախոսահամար" class="form-control"
+                     type="phone" [(ngModel)]="user.phoneNumber">
+            </div>
+            <p class="color-red" *ngIf="error.phoneNumber.bool">{{error.phoneNumber.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input [ngClass]=" error.password.bool ? 'border-red' : ''"
+                     (input)="validatePassword()"
+                     placeholder="Գաղտնաբառ" class="form-control" type="password"  [(ngModel)]="user.password">
+            </div>
+            <p class="color-red" *ngIf="error.password.bool">{{error.password.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <div class="uk-form-field">
+            <input value="Մուտք" class="btn btn-primary" type="button" (click)="signIn()"/>
+          </div>
+          <a class="uk-new-password" href="javascript:void(0)" (click)="forgotPassword = true">Մոռացել էք գաղտնաբառը</a>
+        </div>
+      </div>
+    </div>
+      <!-- reset password-->
+    <div *ngIf="forgotPassword  && !verifySms && !confirmPass" class="uk-login-box--form">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input [ngClass]=" error.confirmPhone.bool ? 'border-red' : ''"
+                     (input)="validateConfirmPhone()"
+                     placeholder="Հեռախոսահամար" class="form-control" type="phone" [(ngModel)]="passVeryfication.phoneNumber">
+            </div>
+            <p class="color-red" *ngIf="error.confirmPhone.bool">{{error.confirmPhone.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <div class="uk-form-field">
+            <input value="Հաստատել" class="btn btn-primary" type="button" (click)="verifyPhoneFunc()"/>
+          </div>
+          <a class="uk-new-password" href="javascript:void(0)" (click)="forgotPassword = false; verifySms = true; confirmPass = false">Մուտքի էջ</a>
+        </div>
+      </div>
+    </div>
+<!--     sms verification-->
+    <div *ngIf="!forgotPassword  && verifySms && !confirmPass" class="uk-login-box--form">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input [ngClass]=" error.sms.bool ? 'border-red' : ''"
+                     (input)="validateSmsCode()"
+                     placeholder="Հաստատել հաղորդագրությունը" class="form-control" type="text" [(ngModel)]="passVeryfication.smsCode">
+            </div>
+            <p class="color-red" *ngIf="error.sms.bool">{{error.sms.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <div class="uk-form-field">
+            <input value="Հաստատել" class="btn btn-primary" type="button" (click)="verifySmsFunc()"/>
+          </div>
+          <a class="uk-new-password" href="javascript:void(0)" (click)="forgotPassword = false; verifySms = false; confirmPass = true">Մուտքի էջ</a>
+        </div>
+      </div>
+    </div>
+<!--     confirm password-->
+    <div *ngIf="!forgotPassword  && !verifySms && confirmPass" class="uk-login-box--form">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input  [ngClass]=" error.newPassword.bool ? 'border-red' : ''"
+                      (input)="newPasswordFunc()"
+                      placeholder="Նոր գաղտնաբառ" class="form-control" type="text" [(ngModel)]="newPassword.password">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input  [ngClass]=" error.newPassword.confirmbool ? 'border-red' : ''"
+                      (input)="confirmNewPasswordFunc()"
+                      placeholder="Հաստատել նոր գաղտնաբառը" class="form-control" type="text" [(ngModel)]="newPassword.passwordconfirm">
+            </div>
+          </div>
+        </div>
+        <p class="color-red" *ngIf="error.newPassword.bool">{{error.newPassword.message}}</p>
+        <p class="color-red" *ngIf="error.newPassword.confirmbool">{{error.newPassword.message}}</p>
+        <div class="col-md-12 text-center">
+          <div class="uk-form-field">
+            <input value="Հաստատել" class="btn btn-primary" type="button" (click)="saveNewPassword()"/>
+          </div>
+          <a class="uk-new-password" href="javascript:void(0)" >Մուտքի էջ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

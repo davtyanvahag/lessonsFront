@@ -1,0 +1,31 @@
+<app-header></app-header>
+<main class="uk-main" *ngIf="singleNews">
+  <section class="uk-section-full">
+    <div class="container">
+      <div class="uk-section-heading">
+        <h2 class="uk-section-title">
+          ՆՈՐՈՒԹՅՈՒՆՆԵՐ
+        </h2>
+      </div>
+      <div class="uk-box-shadow uk-single-news">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="uk-news--image" style="background-image: url({{this.backendUrl + '/'+singleNews.images.filePath}})"></div>
+          </div>
+          <div class="col-md-6">
+            <div class="uk-news--content">
+              <h2 class="uk-news--title">{{singleNews.title}}</h2>
+              <p [innerHTML]="singleNews.description">
+              </p>
+              <div class="uk-news--date">
+                <i class="fa fa-calendar-o"></i>
+                {{singleNews.createdAt | date: 'MM/dd/yyyy'}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

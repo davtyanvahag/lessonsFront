@@ -1,0 +1,220 @@
+<!--<div>-->
+<!--  <ul *ngIf="tests">-->
+<!--    <li *ngFor="let test of tests">-->
+<!--      <h4><a [routerLink]="['/single-test', test._id]">{{test.title}}</a></h4>-->
+<!--      <p>{{test.shortDescription}}</p>-->
+<!--      <p>{{test.price}}</p>-->
+<!--      <p>{{test.createdAt}}</p>-->
+<!--    </li>-->
+<!--  </ul>-->
+<!--</div>-->
+
+<section id="tests" class="uk-tests--section" style="background-image: url('../../../assets/images/tests/Decor.png');">
+  <div class="container">
+    <div class="uk-section-heading">
+      <h2 class="uk-section-title">
+        ԱՆՎՃԱՐ ԹԵՍՏԵՐ
+      </h2>
+    </div>
+    <div class="row uk-row"  *ngIf="tests">
+      <div class="col-lg-4 col-md-6"  *ngFor="let test of tests">
+        <div class="uk-tests--box uk-box-shadow">
+          <div class="uk-tests--head">
+            <h3 class="uk-tests--title uk-doted-title">{{test.title}}</h3>
+
+          </div>
+          <div class="uk-tests--body">
+            <p [innerHTML]="test.shortDescription">
+            </p>
+          </div>
+          <div class="uk-tests--price">
+            <div class="uk-tests--price-inner">
+                                    <span class="uk-tests--price-count">
+                                    Արժեքը
+                                    </span>
+              <span class="uk-tests--price-text">
+                                        {{test.price}} Դրամ
+                                    </span>
+            </div>
+          </div>
+          <div class="uk-tests--footer">
+            <div class="uk-tests--date col-50">
+              <i class="fa fa-calendar-o"></i>
+              {{test.createdAt | date: 'MM/dd/yyyy'}}
+            </div>
+            <div class="uk-tests--more col-50">
+              <a class="btn btn-primary btn-block" [routerLink]="['/single-test', test._id]">Դիտել</a>
+            </div>
+          </div>
+        </div>
+      </div>
+<!--      <div class="col-lg-4 col-md-6">-->
+<!--        <div class="uk-tests&#45;&#45;box uk-box-shadow">-->
+<!--          <div class="uk-tests&#45;&#45;head">-->
+<!--            <h3 class="uk-tests&#45;&#45;title uk-doted-title">Անվանում</h3>-->
+
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;body">-->
+<!--            <p>-->
+<!--              Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--              չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;price">-->
+<!--            <div class="uk-tests&#45;&#45;price-inner">-->
+<!--                                    <span class="uk-tests&#45;&#45;price-count">-->
+<!--                                    Արժեքը-->
+<!--                                    </span>-->
+<!--              <span class="uk-tests&#45;&#45;price-text">-->
+<!--                                        AMD 1200-->
+<!--                                    </span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;footer">-->
+<!--            <div class="uk-tests&#45;&#45;date col-50">-->
+<!--              <i class="fa fa-calendar-o"></i>-->
+<!--              Հունիսի 26.2020-->
+<!--            </div>-->
+<!--            <div class="uk-tests&#45;&#45;more col-50">-->
+<!--              <a class="btn btn-primary btn-block" href="">Դիտել</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-4 col-md-6">-->
+<!--        <div class="uk-tests&#45;&#45;box uk-box-shadow">-->
+<!--          <div class="uk-tests&#45;&#45;head">-->
+<!--            <h3 class="uk-tests&#45;&#45;title uk-doted-title">Անվանում</h3>-->
+
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;body">-->
+<!--            <p>-->
+<!--              Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--              չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;price">-->
+<!--            <div class="uk-tests&#45;&#45;price-inner">-->
+<!--                                    <span class="uk-tests&#45;&#45;price-count">-->
+<!--                                    Արժեքը-->
+<!--                                    </span>-->
+<!--              <span class="uk-tests&#45;&#45;price-text">-->
+<!--                                        AMD 1200-->
+<!--                                    </span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;footer">-->
+<!--            <div class="uk-tests&#45;&#45;date col-50">-->
+<!--              <i class="fa fa-calendar-o"></i>-->
+<!--              Հունիսի 26.2020-->
+<!--            </div>-->
+<!--            <div class="uk-tests&#45;&#45;more col-50">-->
+<!--              <a class="btn btn-primary btn-block" href="">Դիտել</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-4 col-md-6">-->
+<!--        <div class="uk-tests&#45;&#45;box uk-box-shadow">-->
+<!--          <div class="uk-tests&#45;&#45;head">-->
+<!--            <h3 class="uk-tests&#45;&#45;title uk-doted-title">Անվանում</h3>-->
+
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;body">-->
+<!--            <p>-->
+<!--              Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--              չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;price">-->
+<!--            <div class="uk-tests&#45;&#45;price-inner">-->
+<!--                                    <span class="uk-tests&#45;&#45;price-count">-->
+<!--                                    Արժեքը-->
+<!--                                    </span>-->
+<!--              <span class="uk-tests&#45;&#45;price-text">-->
+<!--                                        AMD 1200-->
+<!--                                    </span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;footer">-->
+<!--            <div class="uk-tests&#45;&#45;date col-50">-->
+<!--              <i class="fa fa-calendar-o"></i>-->
+<!--              Հունիսի 26.2020-->
+<!--            </div>-->
+<!--            <div class="uk-tests&#45;&#45;more col-50">-->
+<!--              <a class="btn btn-primary btn-block" href="">Դիտել</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-4 col-md-6">-->
+<!--        <div class="uk-tests&#45;&#45;box uk-box-shadow">-->
+<!--          <div class="uk-tests&#45;&#45;head">-->
+<!--            <h3 class="uk-tests&#45;&#45;title uk-doted-title">Անվանում</h3>-->
+
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;body">-->
+<!--            <p>-->
+<!--              Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--              չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;price">-->
+<!--            <div class="uk-tests&#45;&#45;price-inner">-->
+<!--                                    <span class="uk-tests&#45;&#45;price-count">-->
+<!--                                    Արժեքը-->
+<!--                                    </span>-->
+<!--              <span class="uk-tests&#45;&#45;price-text">-->
+<!--                                        AMD 1200-->
+<!--                                    </span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;footer">-->
+<!--            <div class="uk-tests&#45;&#45;date col-50">-->
+<!--              <i class="fa fa-calendar-o"></i>-->
+<!--              Հունիսի 26.2020-->
+<!--            </div>-->
+<!--            <div class="uk-tests&#45;&#45;more col-50">-->
+<!--              <a class="btn btn-primary btn-block" href="">Դիտել</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="col-lg-4 col-md-6">-->
+<!--        <div class="uk-tests&#45;&#45;box uk-box-shadow">-->
+<!--          <div class="uk-tests&#45;&#45;head">-->
+<!--            <h3 class="uk-tests&#45;&#45;title uk-doted-title">Անվանում</h3>-->
+
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;body">-->
+<!--            <p>-->
+<!--              Հայտնի է, որ ընթերցողը, կարդալով հասկանալի տեքստ,-->
+<!--              չի կարողանա կենտրոնանալ  տեքստի  ձևավորման վրա:-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;price">-->
+<!--            <div class="uk-tests&#45;&#45;price-inner">-->
+<!--                                    <span class="uk-tests&#45;&#45;price-count">-->
+<!--                                    Արժեքը-->
+<!--                                    </span>-->
+<!--              <span class="uk-tests&#45;&#45;price-text">-->
+<!--                                        AMD 1200-->
+<!--                                    </span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="uk-tests&#45;&#45;footer">-->
+<!--            <div class="uk-tests&#45;&#45;date col-50">-->
+<!--              <i class="fa fa-calendar-o"></i>-->
+<!--              Հունիսի 26.2020-->
+<!--            </div>-->
+<!--            <div class="uk-tests&#45;&#45;more col-50">-->
+<!--              <a class="btn btn-primary btn-block" href="">Դիտել</a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+    </div>
+  </div>
+</section>
+

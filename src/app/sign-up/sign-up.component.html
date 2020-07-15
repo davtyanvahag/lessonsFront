@@ -1,1 +1,125 @@
-<p>sign-up works!</p>
+<div class="uk-login-main ">
+  <div class="uk-login-box uk-box-shadow bottom-bg login-bg">
+    <div class="uk-login-box--head">
+      <div class="text-center">
+        <a class="uk-login-box--logo" [routerLink]="['/']">
+          <img src="../../assets/images/Logo%20red.png" alt=""/>
+        </a>
+      </div>
+      <ul class="uk-login-box--nav">
+        <li>
+          <a [routerLink]="['/sign-in']">Մուտք</a>
+        </li>
+        <li class="active">
+          <a href="javascript:void(0)">Գրանցվել</a>
+        </li>
+      </ul>
+    </div>
+    <div class="uk-login-box--form">
+      <div class="row" *ngIf="step === 1">
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input
+                (input)="validateFirstName()" placeholder="Անուն *" [ngClass]=" error.firstName.bool ? 'border-red' : ''" class="form-control" name="firstName" type="text" [(ngModel)]="user.firstName">
+            </div>
+            <p class="color-red" *ngIf="error.firstName.bool">{{error.firstName.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input
+                (input)="validateLastName()" placeholder="Ազգանուն *" [ngClass]=" error.lastName.bool ? 'border-red' : ''" name="lastName"  class="form-control" type="text" [(ngModel)]="user.lastName">
+            </div>
+            <p class="color-red" *ngIf="error.lastName.bool">{{error.lastName.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input
+                (input)="validateSureName()" placeholder="Հայրանուն *" [ngClass]=" error.sureName.bool ? 'border-red' : ''"  name="sureName" class="form-control" type="text" [(ngModel)]="user.sureName">
+            </div>
+            <p class="color-red" *ngIf="error.sureName.bool">{{error.sureName.message}}</p>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input (input)="validateEmail()" placeholder="Էլ հասցե *" [ngClass]=" error.email.bool ? 'border-red' : ''"  name="email" class="form-control" type="email" [(ngModel)]="user.email">
+            </div>
+            <p class="color-red" *ngIf="error.email.bool">{{error.email.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input (input)="validatePhone()" placeholder="Հեռախոսահամար *  օր․՝ +37455123456"  name="phoneNumber" [ngClass]=" error.phoneNumber.bool ? 'border-red' : ''" class="form-control" type="tel" [(ngModel)]="user.phoneNumber">
+            </div>
+            <p class="color-red" *ngIf="error.phoneNumber.bool">{{error.phoneNumber.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input (input)="validateDob()" placeholder="Ծնն․ ամիս/օր/ամսաթիվ *" [ngClass]=" error.dob.bool ? 'border-red' : ''" name="dob" class="form-control" type="text" [(ngModel)]="user.dob">
+            </div>
+            <p class="color-red" *ngIf="error.dob.bool">{{error.dob.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input (input)="validatePassword()" placeholder="Գաղտնաբառ *" [ngClass]=" error.password.bool ? 'border-red' : ''" class="form-control" name="password" type="password" [(ngModel)]="user.password">
+            </div>
+            <p class="color-red" *ngIf="error.password.bool">{{error.password.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-radios justify-content-center">
+              <div class="uk-radio">
+                <input name="male-female" class="styled" id="uk-male" type="radio" value="1" [checked]="user.gender === '1' ? 'checked' : ''" [(ngModel)]="user.gender">
+                <label for="uk-male">Արական</label>
+              </div>
+              <div class="uk-radio">
+                <input name="male-female" class="styled" id="uk-female" type="radio" value="2" [checked]="user.gender === '2' ? 'checked' : ''" [(ngModel)]="user.gender">
+                <label for="uk-female">Իգական</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input name="company" placeholder="Կազմակերպություն" class="form-control" type="text"  [(ngModel)]="user.company">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <div class="uk-form-field">
+            <input value="Գրանցվել" class="btn btn-primary" type="button" (click)="save()"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="step === 2">
+        <div class="col-md-12">
+          <div class="uk-form-field">
+            <div class="uk-search-field">
+              <input placeholder="Հաստատել կարճ հաղորդագրության կոդը" class="form-control" type="phone" [(ngModel)]="sms">
+            </div>
+            <p class="color-red" *ngIf="error.sms.bool">{{error.sms.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <div class="uk-form-field">
+            <input value="Մուտք" class="btn btn-primary" type="button" (click)="confirmCode()"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

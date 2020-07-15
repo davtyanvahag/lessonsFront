@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+
+.color-red{
+  color: #DF342F;
+}
+
+.border-red{
+  border:solid 1px #DF342F;
+}

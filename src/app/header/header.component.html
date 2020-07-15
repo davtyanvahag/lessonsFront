@@ -1,0 +1,72 @@
+<header class="uk-header">
+  <div class="uk-header--container">
+    <div class="uk-header--left">
+      <a class="uk-header--logo" href="javascript:void(0)" (click)="navigateTo('')">
+        <img src="assets/images/Logo%20red.png" alt=""/>
+      </a>
+    </div>
+    <div class="uk-header--right uk-menu-section">
+      <ul class="uk-menu">
+        <li class="active">
+          <a  href="javascript:void(0)" (click)="navigateTo('')">Գլխավոր էջ</a>
+        </li>
+        <li>
+          <a  href="javascript:void(0)" (click)="navigateTo('news')">Նորություններ</a>
+        </li>
+        <li>
+          <a  href="javascript:void(0)" (click)="navigateTo('tests')">Անվճար թեստեր</a>
+        </li>
+        <li>
+          <a  href="javascript:void(0)" (click)="navigateTo('contacts')">Կոնտակտներ</a>
+        </li>
+      </ul>
+      <div class="uk-menu-divider"></div>
+      <ul class="uk-menu uk-header--menu-sign-up ">
+        <li>
+          <a [routerLink]="['/sign-in']">Մուտք</a>
+        </li>
+        <li>
+          <a [routerLink]="['/sign-up']">Գրանցվել</a>
+        </li>
+      </ul>
+      <ul class="uk-menu uk-header--menu-logged d-none">
+        <li class="uk-user-page-link">
+          <a href="/tests.html">
+            <i class="fa fa-user uk-user-icon"></i>
+            <span>Իմ էջ</span>
+            <i class="fa fa-caret-right uk-caret-icon"></i>
+          </a>
+        </li>
+        <li>
+          <ul class="uk-menu uk-header--menu-edit">
+            <li>
+              <a href="/my-page.html">
+                <i class="fa fa-check-square-o"></i>
+                Իմ Տեստերը
+              </a>
+            </li>
+            <li>
+              <a href="/edit-user-page.html">
+                <i class="fa fa-cog"></i>
+                Խմբագրել տվյալները
+              </a>
+            </li>
+            <li>
+              <a href="">
+                <i class="fa fa-sign-out"></i>
+                Դուրս գալ
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="uk-mobile-btn">
+      <div class="uk-menu-open-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+</header>

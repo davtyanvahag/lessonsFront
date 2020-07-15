@@ -1,1 +1,45 @@
-<p>edit-my-account works!</p>
+<div>
+  <ul *ngIf="user">
+    <li>
+      <label for="email">email</label>
+      <input type="text" id="email" name="email" [(ngModel)]="user.email">
+    </li>
+    <li>
+      <label for="firstName">firstName</label>
+      <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName">
+    </li>
+    <li>
+      <label for="lastName">lastName</label>
+      <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName">
+    </li>
+    <li>
+      <label for="sureName">sureName</label>
+      <input type="text" id="sureName" name="sureName" [(ngModel)]="user.sureName">
+    </li>
+    <li>
+      <label for="gender">gender male</label>
+      <input type="radio" id="gender" name="gender" [(ngModel)]="user.gender" value="1" [checked]="user.gender === 1 ? 'checked' : ''">
+      <label for="genderfemale">gender female</label>
+      <input type="radio" id="genderfemale" name="gender" [(ngModel)]="user.gender" value="2" [checked]="user.gender === 2 ? 'checked' : ''">
+    </li>
+    <li>
+      <label for="dob">dob</label>
+      <input type="date" id="dob" name="dob" [(ngModel)]="user.dob">
+    </li>
+    <li>
+      <label for="phone">phone</label>
+      <input type="text" id="phone" name="phone" [(ngModel)]="user.phoneNumber">
+    </li>
+<!--    <li>-->
+<!--      <label for="password">password</label>-->
+<!--      <input type="password" id="password" name="password" [(ngModel)]="user.password">-->
+<!--    </li>-->
+    <li>
+      <label for="company">company</label>
+      <input type="text" id="company" name="company" [(ngModel)]="user.company">
+    </li>
+    <li>
+      <button (click)="save()">Save</button>
+    </li>
+  </ul>
+</div>

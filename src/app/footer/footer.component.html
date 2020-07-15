@@ -1,0 +1,72 @@
+<footer id="contacts" class="uk-footer">
+  <div class="uk-footer--top">
+    <div class="uk-footer--container">
+      <div class="row uk-row">
+        <div class="col-lg-3 col-md-6">
+          <div class="uk-footer--col" *ngIf="about">
+            <a class="uk-footer--logo" href="">
+              <img src="assets/images/Logo%20white.png" alt=""/>
+            </a>
+            <h3 class="uk-footer--title">
+              {{about.title}}
+            </h3>
+            <p class="uk-footer--text" [innerHTML]="about.description">
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6" >
+          <div class="uk-footer--col" *ngIf="contacts">
+            <h3 class="uk-footer--title">
+              Կոնտակտներ
+            </h3>
+            <ul class="uk-footer--info">
+              <li *ngFor="let address of contacts.address">
+                <i class="fa fa-map-marker"></i>
+                <div class="uk-footer--social-address">
+                  <span>{{address.name}}</span>
+                </div>
+              </li>
+              <li *ngFor="let phone of contacts.phone">
+                <i class="fa fa-phone"></i>
+                <a href="tel:{{phone.number}}">{{phone.number}}</a>
+              </li>
+              <li *ngFor="let email of contacts.email">
+                <i class="fa fa-envelope-o"></i>
+                <a href="mailto:{{email.email}}">{{email.email}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-5 col-md-12">
+          <div class="uk-footer--col">
+            <div class="uk-footer--map">
+              <iframe width="600" src="https://maps.google.com/maps?q=Hanrapetutyan%2011%2011&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="uk-footer--bottom">
+    <div class="uk-footer--container">
+      <div class="row uk-row align-items-center">
+        <div class="col-md-6">
+          <p class="uk-footer--copyright">&copy; 2020 Nahapetyan usumnakan kentron.</p>
+        </div>
+        <div class="col-md-6">
+          <div class="uk-footer--social-parent" *ngIf="contacts && contacts.social">
+            <span class="uk-footer--follow-text">Follow Us</span>
+            <ul class="uk-footer--social">
+              <li *ngFor="let social of contacts.social">
+                <a href="{{social.link}}">
+                  <i class="{{social.icon}}"></i>
+                  <span>{{social.name}}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
