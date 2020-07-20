@@ -1,45 +1,193 @@
-<div>
-  <ul *ngIf="user">
-    <li>
-      <label for="email">email</label>
-      <input type="text" id="email" name="email" [(ngModel)]="user.email">
-    </li>
-    <li>
-      <label for="firstName">firstName</label>
-      <input type="text" id="firstName" name="firstName" [(ngModel)]="user.firstName">
-    </li>
-    <li>
-      <label for="lastName">lastName</label>
-      <input type="text" id="lastName" name="lastName" [(ngModel)]="user.lastName">
-    </li>
-    <li>
-      <label for="sureName">sureName</label>
-      <input type="text" id="sureName" name="sureName" [(ngModel)]="user.sureName">
-    </li>
-    <li>
-      <label for="gender">gender male</label>
-      <input type="radio" id="gender" name="gender" [(ngModel)]="user.gender" value="1" [checked]="user.gender === 1 ? 'checked' : ''">
-      <label for="genderfemale">gender female</label>
-      <input type="radio" id="genderfemale" name="gender" [(ngModel)]="user.gender" value="2" [checked]="user.gender === 2 ? 'checked' : ''">
-    </li>
-    <li>
-      <label for="dob">dob</label>
-      <input type="date" id="dob" name="dob" [(ngModel)]="user.dob">
-    </li>
-    <li>
-      <label for="phone">phone</label>
-      <input type="text" id="phone" name="phone" [(ngModel)]="user.phoneNumber">
-    </li>
-<!--    <li>-->
-<!--      <label for="password">password</label>-->
-<!--      <input type="password" id="password" name="password" [(ngModel)]="user.password">-->
-<!--    </li>-->
-    <li>
-      <label for="company">company</label>
-      <input type="text" id="company" name="company" [(ngModel)]="user.company">
-    </li>
-    <li>
-      <button (click)="save()">Save</button>
-    </li>
-  </ul>
+<div class="uk-form--content uk-box-shadow">
+  <div class="uk-content--heading gray-mobile">
+    <h3 class="uk-content-title">Խմբագրել տվյալները</h3>
+  </div>
+  <div class="uk-form--content-form">
+    <div *ngIf="step === 1" class="uk-form--content-form-part">
+      <div class="row">
+        <div class="col-12">
+          <p class="alert-success p-5" *ngIf="pageEtitRes === 3">
+            Տվյալները փոփոխվեց!
+          </p>
+          <p class="alert-success p-5" *ngIf="pageEtitRes === 1">
+            Գաղտնաբառը փոփոխվեց!
+          </p>
+          <p class="alert-success p-5" *ngIf="pageEtitRes === 2">
+            {{pageEtitResMessage}}
+          </p>
+        </div>
+        <div class="col-md-6">
+          <div class="uk-form-field">
+            <label  [ngClass]=" error.firstName.bool ? 'color-red' : ''" for="uk-name">Անուն *</label>
+            <div class="uk-search-field">
+              <input id="uk-name"
+                (input)="validateFirstName()"
+                     placeholder="Անուն *" [ngClass]=" error.firstName.bool ? 'border-red' : ''"
+                     class="form-control" name="firstName" type="text" [(ngModel)]="user.firstName">
+            </div>
+            <p class="color-red" *ngIf="error.firstName.bool">{{error.firstName.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="uk-form-field">
+            <label [ngClass]=" error.email.bool ? 'color-red' : ''" for="uk-email">Էլ հասցե *</label>
+            <div class="uk-search-field">
+              <input id="uk-email"
+                     (input)="validateEmail()" placeholder="Էլ հասցե *"
+                     [ngClass]=" error.email.bool ? 'border-red' : ''"  name="email"
+                     class="form-control" type="email" [(ngModel)]="user.email">
+            </div>
+            <p class="color-red" *ngIf="error.email.bool">{{error.email.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="uk-form-field">
+            <label [ngClass]=" error.lastName.bool ? 'color-red' : ''" for="uk-surname">Ազգանուն *</label>
+            <div class="uk-search-field">
+              <input
+                id="uk-surname"
+                (input)="validateLastName()" placeholder="Ազգանուն *"
+                [ngClass]=" error.lastName.bool ? 'border-red' : ''" name="lastName"  class="form-control"
+                type="text" [(ngModel)]="user.lastName">
+            </div>
+            <p class="color-red" *ngIf="error.lastName.bool">{{error.lastName.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="uk-form-field">
+            <label for="uk-age" [ngClass]=" error.dob.bool ? 'color-red' : ''">Ծնն․ ամիս/օր/ամսաթիվ *</label>
+            <div class="uk-search-field">
+              <input id="uk-age"
+                     (input)="validateDob()"
+                     placeholder="Ծնն․ ամիս/օր/ամսաթիվ *" [ngClass]=" error.dob.bool ? 'border-red' : ''"
+                     name="dob" class="form-control" type="text" [(ngModel)]="user.dob">
+            </div>
+            <p class="color-red" *ngIf="error.dob.bool">{{error.dob.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="uk-form-field">
+            <label [ngClass]=" error.sureName.bool ? 'color-red' : ''" for="uk-name-2">Հայրանուն *</label>
+            <div class="uk-search-field">
+              <input
+                id="uk-name-2"
+                (input)="validateSureName()" placeholder="Հայրանուն *"
+                [ngClass]=" error.sureName.bool ? 'border-red' : ''"  name="sureName"
+                class="form-control" type="text" [(ngModel)]="user.sureName">
+            </div>
+            <p class="color-red" *ngIf="error.sureName.bool">{{error.sureName.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="uk-form-field">
+            <div class="uk-radios">
+              <div class="uk-radio">
+                <input name="male-female" class="styled" id="uk-male"
+                       type="radio" value="option-1"
+                       [(ngModel)]="user.gender"
+                       [value]="1"
+                       [checked]="user.gender === 1 ? 'checked' : ''"/>
+                <label for="uk-male">Արական</label>
+              </div>
+              <div class="uk-radio">
+                <input name="male-female" class="styled" id="uk-female" type="radio" value="option-2"
+                       [(ngModel)]="user.gender"
+                       [value]="2"
+                       [checked]="user.gender === 2 ? 'checked' : ''"/>
+                <label for="uk-female">Իգական</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="uk-form-field">
+            <label for="uk-tel" [ngClass]=" error.phoneNumber.bool ? 'color-red' : ''">Հեռախոսահամար *</label>
+            <div class="uk-search-field">
+              <input id="uk-tel" (input)="validatePhone()"
+                     placeholder="Հեռախոսահամար *  օր․՝ +37455123456"  name="phoneNumber"
+                     [ngClass]=" error.phoneNumber.bool ? 'border-red' : ''"
+                     class="form-control" type="tel" [(ngModel)]="user.phoneNumber">
+            </div>
+            <p class="color-red" *ngIf="error.phoneNumber.bool">{{error.phoneNumber.message}}</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="uk-form-field">
+            <label for="uk-company">Կազմակերպություն</label>
+            <div class="uk-search-field">
+              <input placeholder="Կազմակերպություն" id="uk-company" class="form-control" type="text">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 text-right">
+          <div class="uk-form-button">
+            <input class="btn btn-primary" type="button" value="Խմբագրել" (click)="update()">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="step === 2" class="uk-form--content-form-part">
+      <div class="row">
+        <div class="col-12">
+          <p class="alert-success p-5" *ngIf="passReset === 1">
+            Գաղտնաբառը փոփոխվեց!
+          </p>
+          <p class="alert-success p-5" *ngIf="passReset === 2">
+            {{resPassMessage}}
+          </p>
+        </div>
+        <div class="col-3"></div>
+        <div class="col-md-6">
+          <div class="uk-form-field">
+            <label  [ngClass]=" error.password.bool ? 'color-red' : ''" for="uk-old-password">Հին Գաղտնաբառ *</label>
+            <div class="uk-search-field">
+              <input id="uk-old-password"
+                     (input)="validatePassword()"
+                     placeholder="Հին Գաղտնաբառ *" [ngClass]=" error.password.bool ? 'border-red' : ''"
+                     class="form-control" name="password" type="password" [(ngModel)]="updatePassword.oldPassword">
+            </div>
+            <p class="color-red" *ngIf="error.password.bool">{{error.password.message}}</p>
+          </div>
+          <div class="uk-form-field">
+            <label  [ngClass]=" error.password.newPassbool ? 'color-red' : ''" for="uk-new-password">Նոր Գաղտնաբառ *</label>
+            <div class="uk-search-field">
+              <input id="uk-new-password"
+                     (input)="validateNewPassword()"
+                     placeholder="Նոր Գաղտնաբառ *" [ngClass]=" error.password.newPassbool ? 'border-red' : ''"
+                     class="form-control" name="newPass" type="password" [(ngModel)]="updatePassword.newPassword">
+            </div>
+            <p class="color-red" *ngIf="error.password.newPassbool">{{error.password.messagenewPassbool}}</p>
+          </div>
+          <div class="uk-form-field">
+            <label  [ngClass]=" error.password.newPassConfbool ? 'color-red' : ''" for="uk-new-confirm-password">Կրկնել նոր գաղտնաբառը *</label>
+            <div class="uk-search-field">
+              <input id="uk-new-confirm-password"
+                     (input)="validateNewPasswordConfirm()"
+                     placeholder="Կրկնել նոր գաղտնաբառը *" [ngClass]=" error.password.newPassConfbool ? 'border-red' : ''"
+                     class="form-control" name="newConfPass" type="password" [(ngModel)]="updatePassword.newConfPassword">
+            </div>
+            <p class="color-red" *ngIf="error.password.newPassConfbool">{{error.password.messagenewPassConfbool}}</p>
+          </div>
+          <div class="uk-form-field">
+            <button class="btn btn-outline-primary" (click)="resetPassword()">
+              Փոխել գաղտնաբառը
+            </button>
+          </div>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    </div>
+    <div class="uk-form--content-form-part">
+      <div class="uk-delete-buttons">
+        <button class="btn btn-outline-primary" *ngIf="step === 1" (click)="step = 2">
+          <i class="fa fa-lock" aria-hidden="true"></i>
+          Փոխել գաղտնաբառը
+        </button>
+        <button class="btn btn-outline-primary" *ngIf="step === 2" (click)="step = 1">
+          <i class="fa fa-pencil" aria-hidden="true"></i>
+          Խմբագրել տվյալները
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

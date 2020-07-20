@@ -16,6 +16,11 @@
       </ul>
     </div>
     <div *ngIf="!forgotPassword && !verifySms && !confirmPass" class="uk-login-box--form">
+      <div class="row" *ngIf="passwordReseted">
+        <div class="col-12">
+          <p class="alert-success">Գաղտնաբառը փոփոխվեց</p>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-12">
           <div class="uk-form-field">
@@ -81,6 +86,7 @@
         </div>
         <div class="col-md-12 text-center">
           <div class="uk-form-field">
+            <input value="Ուղարկել նորից" class="btn btn-secondary" type="button" (click)="verifyPhoneFunc()"/>
             <input value="Հաստատել" class="btn btn-primary" type="button" (click)="verifySmsFunc()"/>
           </div>
           <a class="uk-new-password" href="javascript:void(0)" (click)="forgotPassword = false; verifySms = false; confirmPass = true">Մուտքի էջ</a>
@@ -95,7 +101,7 @@
             <div class="uk-search-field">
               <input  [ngClass]=" error.newPassword.bool ? 'border-red' : ''"
                       (input)="newPasswordFunc()"
-                      placeholder="Նոր գաղտնաբառ" class="form-control" type="text" [(ngModel)]="newPassword.password">
+                      placeholder="Նոր գաղտնաբառ" class="form-control" type="password" [(ngModel)]="newPassword.password">
             </div>
           </div>
         </div>
@@ -104,7 +110,7 @@
             <div class="uk-search-field">
               <input  [ngClass]=" error.newPassword.confirmbool ? 'border-red' : ''"
                       (input)="confirmNewPasswordFunc()"
-                      placeholder="Հաստատել նոր գաղտնաբառը" class="form-control" type="text" [(ngModel)]="newPassword.passwordconfirm">
+                      placeholder="Հաստատել նոր գաղտնաբառը" class="form-control" type="password" [(ngModel)]="newPassword.passwordconfirm">
             </div>
           </div>
         </div>

@@ -20,7 +20,7 @@ export class NewsComponent implements OnInit {
   ngOnInit() {
     this.backendUrl = environment.apiUrl;
     this.page = 1;
-    this.limit = 10;
+    this.limit = 6;
     this.getNews();
   }
 
@@ -31,6 +31,21 @@ export class NewsComponent implements OnInit {
         this.total = res.total;
       }
     });
+  }
+
+  currentpage(n: number): void {
+    this.page = n;
+    this.getNews();
+  }
+
+  next(): void {
+    this.page++;
+    this.getNews();
+  }
+
+  prev(): void {
+    this.page--;
+    this.getNews();
   }
 
 }

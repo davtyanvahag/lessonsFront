@@ -1,1 +1,118 @@
-<p>single works!</p>
+<app-header></app-header>
+<main class="uk-main">
+  <section class="pt-3">
+    <div class="uk-section-has-sidebar--container" *ngIf="test">
+      <div class="row uk-row">
+        <div class="col-lg-12">
+          <div class="uk-tab-content">
+            <div class="uk-tab-content--inner">
+              <div class="uk-content--heading gray-mobile">
+                <h3 class="uk-content-title" *ngIf="test.testsList">
+                  {{test.testsList.title}} <span class="uk-content-title--span">|</span>
+                  {{test.total_point_questons}} միավոր
+                </h3>
+                <span class="uk-option--time" *ngIf="start">
+                    <i class="fa fa-clock-o"></i>
+                    {{timeMinutes}}:{{timeSeconds}}
+                </span>
+                <button class="btn btn-primary" *ngIf="!start" (click)="getStarted()">
+                    Սկսել
+                </button>
+              </div>
+              <div class="uk-tabs" *ngIf="start">
+                <div class="uk-tabs--part">
+                  <div class="uk-tabs--navs" >
+                    <a href="javascript:void(0)" class="uk-tabs--navs-qn "
+                       *ngFor="let question of test.questionsList; let i = index"
+                       (click)="activeIndex = i"
+                       [ngClass]="[activeIndex === i ? 'active' : '', answerd[i] ? 'answerd-question' : '']">
+                      Հարց {{i + 1}}
+                    </a>
+                  </div>
+                </div>
+                <div class="uk-tabs--part">
+
+                  <!--Tab 1-->
+                  <div *ngFor="let question of test.questionsList; let i = index">
+                    <span class="uk-acc-head d-lg-none"
+                          (click)="activeIndex = i"
+                          [ngClass]="[activeIndex === i ? 'active' : '', answerd[i] ? 'done' : '']">Հարց {{i + 1}} <span></span> </span>
+                    <div class="uk-tabs--part-content " [ngClass]="activeIndex === i ? 'active' : ''">
+                      <div class="uk-tabs--part-heading">
+                        <h3>{{question.title}}</h3>
+                      </div>
+                      <div class="row uk-row">
+                        <div class="col-md-12" *ngFor="let ans of question.answers; let k = index">
+                          <div class="uk-option">
+                            <div class="uk-checkbox">
+                              <input class="styled" id="uk-checkbox-{{i}}-{{k}}" type="checkbox" name="answer{{i}}_{{k}}" (click)="answer(i, k)">
+                              <label for="uk-checkbox-{{i}}-{{k}}">
+                                <span class="uk-option--text">{{ans.title}}</span>
+                                <span class="uk-option--image" *ngIf="ans.images">
+                                  <img *ngIf="ans.images.filePath" src="{{backendUrl + ans.images.filePath}}" alt=""/>
+                              </span>
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="uk-option--nav">
+                            <div class="uk-option--nav-part">
+                              <ul class="uk-option--nav-links">
+                                <li *ngIf="i > 0">
+                                  <a href="javascript:void(0)"
+                                     (click)="activeIndex = activeIndex - 1">
+                                    <i class="fa fa-long-arrow-left mr-2"></i>
+                                    Նախորդը
+                                  </a>
+                                </li>
+                                <li *ngIf="i < test.questionsList.length - 1">
+                                  <a href="javascript:void(0)"
+                                     (click)="activeIndex = activeIndex + 1">
+                                    Հաջորդը
+                                    <i class="fa fa-long-arrow-right ml-2"></i>
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="uk-option--nav-part">
+                              <input class="btn btn-primary" type="button" value="Ավարտ" (click)="modalShowHide = true"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Tab 1-->
+                </div>
+              </div>
+              <div *ngIf="!start">
+                Խնդրում ենք սեխմել "Սկսել" կոճակը, թեստը սկսելու համար
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="myModal" [ngClass]="modalShowHide ? 'modal-show' : 'modal-hide'" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header clearfix">
+          <span class="close" (click)="modalShowHide = false">&times;</span>
+        </div>
+        <div class="modal-body border-top">
+          <p><b>Համոզված եք, որ ուզում եք ավարտել թեստը!</b></p>
+        </div>
+        <div class="modal-footer text-right  border-top p-2">
+          <button class="btn btn-secondary"  (click)="modalShowHide = false">Ոչ</button>
+          <button class="btn btn-primary"  (click)="endTest()">Այո</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {catchError, retry} from 'rxjs/operators';
 import {throwError} from 'rxjs';
@@ -17,6 +17,22 @@ export class SingleTestService {
       retry(1),
       catchError(this.handleError)
 
+    );
+  }
+
+  order(obj) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
+    return this.http.post(environment.apiUrl + '/orders/add', obj, { headers: headers}).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  updateUsedSum(obj) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
+    return this.http.put(environment.apiUrl + '/tests/updateUsedSum', obj, { headers: headers}).pipe(
+      retry(1),
+      catchError(this.handleError)
     );
   }
 

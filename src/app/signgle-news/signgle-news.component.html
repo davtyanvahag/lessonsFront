@@ -1,7 +1,7 @@
 <app-header></app-header>
-<main class="uk-main" *ngIf="singleNews">
+<main class="uk-main" >
   <section class="uk-section-full">
-    <div class="container">
+    <div class="container" *ngIf="singleNews">
       <div class="uk-section-heading">
         <h2 class="uk-section-title">
           ՆՈՐՈՒԹՅՈՒՆՆԵՐ
@@ -10,7 +10,7 @@
       <div class="uk-box-shadow uk-single-news">
         <div class="row">
           <div class="col-md-6">
-            <div class="uk-news--image" style="background-image: url({{this.backendUrl + '/'+singleNews.images.filePath}})"></div>
+            <div class="uk-news--image" [ngStyle]="{'background-image': 'url(' + backendUrl + '/'+singleNews.images.filePath + ')'}"></div>
           </div>
           <div class="col-md-6">
             <div class="uk-news--content">

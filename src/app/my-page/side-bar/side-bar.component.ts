@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
+import {SharedService} from '../../shared/shared.service';
 
 @Component({
   selector: 'app-side-bar',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideBarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/sign-in']);
   }
 
 }

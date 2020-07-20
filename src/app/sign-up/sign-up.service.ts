@@ -11,7 +11,28 @@ export class SignUpService {
   headers = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient) {
-    console.log();
+  }
+
+  currentAdmin() {
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
+    return this.http.get(`${environment.apiUrl}`  + '/users/getCurrentUser', { headers: headers }).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  sendSms(obj) {
+    return this.http.post(environment.apiUrl + '/users/sendSms', obj, {headers: this.headers}).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  confirmSmsCode(obj) {
+    return this.http.post(environment.apiUrl + '/users/confirmSmsCode', obj, {headers: this.headers}).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
   }
 
   signUp(obj) {

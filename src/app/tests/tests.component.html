@@ -1,1 +1,119 @@
-<p>tests works!</p>
+<app-header></app-header>
+<main class="uk-main">
+  <section class="uk-section-has-sidebar">
+    <div class="uk-section-has-sidebar--container">
+      <div class="row uk-row">
+        <div class="col-xl-3 col-lg-4 d-none d-lg-block mobile-filter-col">
+          <div class="uk-sidebar uk-box-shadow">
+            <div class="uk-sidebar--heading">
+              <h3 class="uk-sidebar-title">Դասընթացներ</h3>
+              <span class="uk-mobile-filter d-lg-none">
+                  <span>փակել</span>
+                  <div class="filter-close">
+                      <span></span>
+                      <span></span>
+                  </div>
+              </span>
+            </div>
+            <div class="uk-filter-box">
+                <div class="uk-form-field">
+                  <label for="uk-search-input">Որոնել</label>
+                  <div class="uk-search-field">
+                    <input id="uk-search-input" class="form-control" type="text" [(ngModel)]="search.title" (input)="getTests()"/>
+                    <i class="fa fa-search"></i>
+                  </div>
+                </div>
+                <div class="uk-form-field">
+                  <label>Բաժիններ</label>
+                  <div class="uk-select-field">
+                    <ng-select class="custom" [items]="specialties"
+                               bindLabel="name"
+                               bindValue="_id"
+                               (search) = "init = false; searchCategories($event)"
+                               (change) = "getCatId()"
+                               [(ngModel)]="search.categoryId">
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="uk-form-field">
+                  <label>Ենթաբաժիններ</label>
+                  <div class="uk-select-field">
+                    <ng-select class="custom" [items]="subSpeciatlties"
+                               bindLabel="name"
+                               bindValue="_id"
+                               (search) = "init = false; searchSubCategories($event)"
+                               (change) = "getTests()"
+                               [(ngModel)]="search.subCategoryId">
+                    </ng-select>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-9 col-lg-8">
+          <div class="uk-content--heading">
+            <h3 class="uk-content-title">Անվանում</h3>
+            <div class="d-lg-none">
+              <span class="uk-mobile-filter">
+                  <span>ֆիլտր</span>
+                  <i class="fa fa-sliders" aria-hidden="true"></i>
+              </span>
+            </div>
+          </div>
+          <span class="uk-search-result">Գտնվել է <span class="uk-search-result--count">{{total && total > 0 ? total : 0}}</span> դասընթաց</span>
+          <div class="uk-content">
+            <div class="row uk-row" *ngIf="tests && tests.length > 0 && total > 0">
+              <div class="col-xl-4 col-lg-6" *ngFor="let test of tests">
+                <div class="uk-tests--box uk-box-shadow bottom-bg">
+                  <div class="uk-tests--head">
+                    <h3 class="uk-tests--title uk-doted-title">{{test.title}}</h3>
+                  </div>
+                  <div class="uk-tests--body">
+                    <p [innerHTML]="test.shortDescription">
+                    </p>
+                  </div>
+                  <div class="uk-tests--price">
+                    <div class="uk-tests--price-inner">
+                                                <span class="uk-tests--price-count">
+                                                Արժեքը
+                                                </span>
+                      <span class="uk-tests--price-text">
+                                                    {{test.price > 0 ? test.price + ' Դրամ' : 'Անվճար'}}
+                                                </span>
+                    </div>
+                  </div>
+                  <div class="uk-tests--footer">
+                    <div class="uk-tests--date col-50">
+                      <i class="fa fa-calendar-o"></i>
+                      {{test.createdAt | date: 'MM/dd/yyyy'}}
+                    </div>
+                    <div class="uk-tests--more col-50">
+                      <a class="btn btn-primary btn-block" [routerLink]="['/single-test', test._id]">Դիտել</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row uk-row" *ngIf="!tests || tests.length === 0 || total === 0">
+              <div class="col-xl-12 mt-2">
+                <h5>Տվյալներ չեն գտնվե</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <app-pagination
+            [count]="total"
+            [page]="page"
+            [perPage]="limit"
+            [pagesToShow]="5"
+            (goPrev)="prev()"
+            (goNext)="next()"
+            (goPage)="currentpage($event)"
+          ></app-pagination>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<app-footer></app-footer>

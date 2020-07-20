@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+// import { CarouselModule } from 'ngx-owl-carousel-o';
+import { NguCarouselModule } from '@ngu/carousel';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
@@ -21,7 +22,8 @@ import {SharedComponentsModule} from '../shared/shared-components/shared-compone
     TestsComponent],
   imports: [
     CommonModule,
-    CarouselModule,
+    // CarouselModule,
+    NguCarouselModule,
     SharedComponentsModule,
     HomeRoutingModule
   ],

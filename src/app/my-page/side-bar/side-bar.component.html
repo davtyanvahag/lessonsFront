@@ -1,13 +1,27 @@
-<div>
-  <ul>
-    <li>
-      <a [routerLink]="['./']">my page</a>
-    </li>
-    <li>
-      <a [routerLink]="['./my-test']">my tests</a>
-    </li>
-    <li>
-      <a [routerLink]="['./edit-my-account']">edit my page</a>
-    </li>
-  </ul>
+<div class="uk-sidebar uk-box-shadow">
+  <h3 class="uk-sidebar-title">Իմ էջ</h3>
+  <div class="uk-menu-box">
+    <ul class="uk-sidebar-menu">
+      <li >
+        <a [routerLinkActive]="['color-red']" [routerLink]="['./my-tests']">
+          <i class="fa fa-check-square-o ico-left"></i>
+          Իմ Թեստերը
+          <i class="fa fa-caret-right ico-right"></i>
+        </a>
+      </li>
+      <li>
+        <a [routerLinkActive]="['color-red']" [routerLink]="['./edit-my-account']">
+          <i class="fa fa-cog ico-left"></i>
+          Խմբագրել տվյալները
+          <i class="fa fa-caret-right ico-right"></i>
+        </a>
+      </li>
+      <li>
+        <a href="javascript:void(0)" (click)="logout()">
+          <i class="fa fa-sign-out ico-left"></i>
+          Դուրս գալ
+        </a>
+      </li>
+    </ul>
+  </div>
 </div>

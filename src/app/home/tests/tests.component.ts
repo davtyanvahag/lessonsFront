@@ -29,4 +29,19 @@ export class TestsComponent implements OnInit {
     });
   }
 
+  currentpage(n: number): void {
+    this.page = n;
+    this.getTests();
+  }
+
+  next(): void {
+    this.page++;
+    this.getTests();
+  }
+
+  prev(): void {
+    this.page--;
+    this.getTests();
+  }
+
 }

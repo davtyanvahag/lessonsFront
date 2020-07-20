@@ -16,7 +16,21 @@ export class AccountService {
   }
 
   edit(obj) {
+    return this.http.post(environment.apiUrl + '/users/updatePasswordWithConfirm', obj, {headers: this.headers}).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  update(obj) {
     return this.http.post(environment.apiUrl + '/users/update', obj, {headers: this.headers}).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  resetPassword(obj) {
+    return this.http.post(environment.apiUrl + '/users/updatePassword', obj, {headers: this.headers}).pipe(
       retry(1),
       catchError(this.handleError)
     );

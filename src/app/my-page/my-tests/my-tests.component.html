@@ -1,1 +1,60 @@
-<p>my-tests works!</p>
+
+  <h3 class="uk-content-title gray-mobile">
+    Ընդհանուր {{total}} միավոր
+    <span class="btn btn-primary float-right" [routerLink]="['/tests']">Նոր թեստեր</span>
+  </h3>
+  <div class="uk-content">
+    <div class="row uk-row"  *ngIf="orders && orders.length > 0">
+      <div class="col-xl-6" *ngFor="let order of orders" [ngClass]="order.participated === 3 ? 'uk-completed-test' : ''">
+        <div class="uk-tests--box uk-box-shadow">
+          <div class="uk-tests--head uk-tests--head-double">
+            <div class="pr-sm-3 col-70">
+              <h3 class="uk-tests--title uk-doted-title">{{order.testsList.title}}</h3>
+              <p class="uk-tests--text" [innerHTML]="order.testsList.shortDescription">
+              </p>
+            </div>
+            <div class="col-30 text-right uk-points--info">
+              <span class="uk-points">{{order.total_point_questons}} միավոր</span>
+              <span class="uk-points--completed">Անցել է {{order.user_total_point_answers ? order.user_total_point_answers : 0}} միավոր</span>
+            </div>
+          </div>
+          <div class="uk-tests--footer">
+            <div class="uk-tests--date col-70">
+              <div class="uk-tests--date-part">
+                <i class="fa fa-calendar-o"></i>
+                {{order.orderDate ? (order.orderDate | date: 'MM/dd/yyyy HH:mm') : '-'}}
+              </div>
+              <div class="uk-tests--date-part">
+                <i class="fa fa-calendar-o"></i>
+                {{order.finishDate ? (order.finishDate | date: 'MM/dd/yyyy HH:mm') : '-'}}
+              </div>
+            </div>
+            <div class="uk-tests--more col-30">
+              <a class="btn btn-primary btn-block" [routerLink]="['/my-page/my-tests/single/', order._id]" *ngIf="order.participated === 1">Սկսել</a>
+              <a class="btn btn-secondary btn-block" href="javascript:void(0)" *ngIf="order.participated === 3">Դիտել</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="row uk-row"  *ngIf="!orders || orders.length === 0">
+      <div class="col-12">
+        <p>Տվյալներ չեն գտնվե</p>
+      </div>
+    </div>
+  </div>
+<div class="ռօո">
+  <div class="uk-pagination">
+    <app-pagination
+      [count]="total"
+      [page]="page"
+      [perPage]="limit"
+      [pagesToShow]="5"
+      (goPrev)="prev()"
+      (goNext)="next()"
+      (goPage)="currentpage($event)"
+    ></app-pagination>
+  </div>
+</div>
+

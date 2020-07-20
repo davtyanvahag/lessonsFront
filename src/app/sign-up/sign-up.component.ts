@@ -30,6 +30,11 @@ export class SignUpComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.signUpService.currentAdmin().subscribe((res: any) => {
+      if (!res.error && res.user && res.user !== null) {
+        this.router.navigate(['/my-page']);
+      }
+    });
     this.step = 1;
     this.error = {
       email: {
@@ -83,13 +88,28 @@ export class SignUpComponent implements OnInit {
     }
     if (!validateFields) {
       console.log(this.user);
-      /*
-      send sms from signup
-       */
-      this.step = 2;
+      this.user.gender = Number(this.user.gender);
+      this.signUpService.signUp(this.user).subscribe((res: any) => {
+        console.log('Create user::: ', res)
+        if ( !res.error) {
+          this.signUpService.sendSms({phoneNumber: this.user.phoneNumber}).subscribe((resp: any) => {
+            console.log('Sms user::: ', resp)
+            if ( !resp.error) {
+              this.step = 2;
+            } else {
+              this.error.phoneNumber.bool = true;
+              this.error.phoneNumber.message = 'Առկա են Տեխնիկական խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
+            }
+          });
+        }
+      });
     } else {
       return false;
     }
+  }
+
+  sendSmsAgain() {
+    this.signUpService.sendSms({phoneNumber: this.user.phoneNumber}).subscribe((resp: any) => { });
   }
 
   confirmCode() {
@@ -103,10 +123,12 @@ export class SignUpComponent implements OnInit {
         this.error.sms.message = 'Մուտքագրված կոդը սխալ է, պետք է լինի 5 նիշ, միայն թվեր';
         return false;
       }  else {
-        this.user.gender = Number(this.user.gender);
-        this.signUpService.signUp(this.user).subscribe((res: any) => {
+        this.signUpService.confirmSmsCode({phoneNumber: this.user.phoneNumber, sms: this.sms}).subscribe((res: any) => {
           if ( !res.error) {
             this.router.navigate(['/sign-in']);
+          } else {
+            this.error.sms.bool = true;
+            this.error.sms.message = 'Առկա են Տեխնիկական խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
           }
         });
       }

@@ -1,8 +1,59 @@
 <app-header></app-header>
-<div *ngIf="singleTest">
-  <h4>{{singleTest.title}}</h4>
-  <p>{{singleTest.longDescription}}</p>
-  <p>{{singleTest.price}}</p>
-  <p>{{singleTest.createdAt}}</p>
-</div>
+<main class="uk-main">
+  <section class="uk-section-full">
+    <div class="container" *ngIf="singleTest">
+      <div class="uk-single-test uk-box-shadow">
+        <div class="uk-single-test--heading">
+          <h2 class="uk-single-test--title">
+            {{singleTest.title}}
+          </h2>
+          <div class="uk-single-test--heading-info">
+            <div class="uk-single-test--heading-info-part pr-2">
+              Գինը: {{singleTest.price > 0 ? singleTest.price + ' Դրամ' : 'Անվճար'}}
+            </div>
+            <div class="uk-single-test--heading-info-part">
+              <a class="btn btn-primary" *ngIf="singleTest.price > 0" href="javascript:void(0)" (click)="order(1)">
+                Վճարել
+              </a>
+              <a class="btn btn-primary" *ngIf="singleTest.price === 0" href="javascript:void(0)" (click)="order(5)">
+                Ավելացնել իմ թեստերում
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="uk-single-test--content">
+          <p [innerHTML]="singleTest.longDescription"></p>
+        </div>
+      </div>
+    </div>
+    <div class="container" *ngIf="!singleTest">
+      <div class="uk-single-test uk-box-shadow">
+        <div class="uk-single-test--heading">
+          <h2 class="uk-single-test--title">
+            Տվյալներ չեն գտնվե
+          </h2>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Modal -->
+  <div id="myModal" [ngClass]="modalShowHide ? 'modal-show' : 'modal-hide'" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <span class="close" (click)="modalShowHide = false">&times;</span>
+      </div>
+      <div class="modal-body border-top">
+        <p><b>Խնդրում ենք մուտք գործել համակարգ!</b></p>
+      </div>
+      <div class="modal-footer text-right  border-top p-2">
+        <button class="btn btn-secondary"  (click)="modalShowHide = false">Չեղարկել</button>
+        <button class="btn btn-primary"  [routerLink]="['/sign-in']">Մուտք</button>
+      </div>
+    </div>
+
+  </div>
+</main>
 <app-footer></app-footer>

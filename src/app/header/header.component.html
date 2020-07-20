@@ -21,7 +21,7 @@
         </li>
       </ul>
       <div class="uk-menu-divider"></div>
-      <ul class="uk-menu uk-header--menu-sign-up ">
+      <ul class="uk-menu uk-header--menu-sign-up " *ngIf="!isLoggedIn">
         <li>
           <a [routerLink]="['/sign-in']">Մուտք</a>
         </li>
@@ -29,9 +29,9 @@
           <a [routerLink]="['/sign-up']">Գրանցվել</a>
         </li>
       </ul>
-      <ul class="uk-menu uk-header--menu-logged d-none">
+      <ul class="uk-menu uk-header--menu-logged" *ngIf="isLoggedIn">
         <li class="uk-user-page-link">
-          <a href="/tests.html">
+          <a [routerLink]="['/my-page']">
             <i class="fa fa-user uk-user-icon"></i>
             <span>Իմ էջ</span>
             <i class="fa fa-caret-right uk-caret-icon"></i>
@@ -40,19 +40,19 @@
         <li>
           <ul class="uk-menu uk-header--menu-edit">
             <li>
-              <a href="/my-page.html">
+              <a [routerLinkActive]="['color-red']" [routerLink]="['./my-tests']">
                 <i class="fa fa-check-square-o"></i>
-                Իմ Տեստերը
+                Իմ Թեստերը
               </a>
             </li>
             <li>
-              <a href="/edit-user-page.html">
+              <a [routerLinkActive]="['color-red']" [routerLink]="['./edit-my-account']">
                 <i class="fa fa-cog"></i>
                 Խմբագրել տվյալները
               </a>
             </li>
             <li>
-              <a href="">
+              <a href="javascript:void(0)" (click)="logout()">
                 <i class="fa fa-sign-out"></i>
                 Դուրս գալ
               </a>

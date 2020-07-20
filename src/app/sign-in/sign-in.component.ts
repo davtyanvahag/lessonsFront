@@ -19,17 +19,24 @@ export class SignInComponent implements OnInit {
     smsCode: ''
   };
   newPassword: any = {
-    phone: '',
+    phoneNumber: '',
     password: '',
     passwordconfirm: ''
   };
+  passwordReseted = false;
   forgotPassword = false;
   verifySms = false;
   confirmPass = false;
   constructor(private signInService: SignInService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
+    this.signInService.currentAdmin().subscribe((res: any) => {
+      if (!res.error && res.user && res.user !== null) {
+        this.router.navigate(['/my-page']);
+      }
+    });
     this.error = {
       phoneNumber: {
         bool: false,
@@ -56,13 +63,48 @@ export class SignInComponent implements OnInit {
   }
 
   signIn() {
+    this.validatePhone();
+    this.validatePassword();
+    if (this.error.phoneNumber.bool || this.error.password.bool) {
+      return false;
+    }
     this.signInService.signIn(this.user).subscribe( (res: any) => {
       if (!res.error) {
         localStorage.setItem('token', res.token);
         this.router.navigate(['/my-page']);
+      } else {
+        this.error.phoneNumber.bool = true;
+        if (res.message === 'Invalid credentials') {
+          this.error.phoneNumber.message = 'Համապատասխան տվյալներով օգտատեր չի գտնվե';
+        } else {
+          this.error.phoneNumber.message = 'Առկա են Տեխնիկական կամ նունականացման խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
+        }
       }
     });
   }
+
+  // confirmCode() {
+  //   if (!this.sms || typeof this.sms === 'undefined' || this.sms.length < 5 || this.sms.length > 5) {
+  //     this.error.sms.bool = true;
+  //     this.error.sms.message = 'Կոդը պարտադիր դաշտ է'
+  //     return false;
+  //   } else {
+  //     if (!this.smsValidation(this.sms)) {
+  //       this.error.sms.bool = true;
+  //       this.error.sms.message = 'Մուտքագրված կոդը սխալ է, պետք է լինի 5 նիշ, միայն թվեր';
+  //       return false;
+  //     }  else {
+  //       this.signUpService.confirmSmsCode({phoneNumber: this.user.phoneNumber, sms: this.sms}).subscribe((res: any) => {
+  //         if ( !res.error) {
+  //           this.router.navigate(['/sign-in']);
+  //         } else {
+  //           this.error.sms.bool = true;
+  //           this.error.sms.message = 'Առկա են Տեխնիկական խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
 
 
 
@@ -91,17 +133,18 @@ export class SignInComponent implements OnInit {
 
   validateConfirmPhone() {
     if (!this.passVeryfication.phoneNumber || typeof this.passVeryfication.phoneNumber === 'undefined' || this.passVeryfication.phoneNumber.length === 0) {
-      this.error.sms.bool = true;
-      this.error.sms.message = 'Հեռախոսահամարը պարտադիր դաշտ է, +37455123456';
+      this.error.confirmPhone.bool = true;
+      this.error.confirmPhone.message = 'Հեռախոսահամարը պարտադիր դաշտ է, +37455123456';
     } else {
       if (!this.phoneValidation(this.passVeryfication.phoneNumber)) {
-        this.error.sms.bool = true;
-        this.error.sms.message = 'Հեռախոսահամարը վավեր չէ';
+        this.error.confirmPhone.bool = true;
+        this.error.confirmPhone.message = 'Հեռախոսահամարը վավեր չէ';
       } else {
-        this.error.sms.bool = false;
+        this.error.confirmPhone.bool = false;
       }
     }
   }
+
   validateSmsCode() {
     if (!this.passVeryfication.smsCode || typeof this.passVeryfication.smsCode === 'undefined' || this.passVeryfication.smsCode.length < 5 || this.passVeryfication.smsCode.length > 5) {
       this.error.confirmPhone.bool = true;
@@ -133,8 +176,9 @@ export class SignInComponent implements OnInit {
       if (this.newPassword.passwordconfirm !== this.newPassword.password ) {
         this.error.newPassword.confirmbool = true;
         this.error.newPassword.message = 'Չի համապատասխանում';
+      } else {
+        this.error.newPassword.confirmbool = false;
       }
-      this.error.newPassword.confirmbool = false;
     }
   }
 
@@ -155,12 +199,15 @@ export class SignInComponent implements OnInit {
     if (this.error.newPassword.bool || this.error.newPassword.confirmbool) {
       return false;
     }
-    // this.signInService.resetNewPassword(this.newPass).subscribe( (res: any) => {
-    //   if (!res.error) {
-    //     localStorage.setItem('token', res.token);
-    //     this.forgotPassword = false;
-    //   }
-    // });
+    this.newPassword.phoneNumber = this.passVeryfication.phoneNumber;
+    this.signInService.resetNewPassword(this.newPassword).subscribe( (res: any) => {
+      if (!res.error) {
+        this.forgotPassword = false;
+        this.verifySms = false;
+        this.confirmPass = false;
+        this.passwordReseted = true;
+      }
+    });
   }
 
   verifyPhoneFunc() {
@@ -168,9 +215,16 @@ export class SignInComponent implements OnInit {
     if (this.error.confirmPhone.bool) {
       return false;
     }
-    /*
-    add function for sending sms
-     */
+    this.signInService.sendSms({phoneNumber: this.passVeryfication.phoneNumber}).subscribe((resp: any) => {
+      if ( !resp.error) {
+        this.forgotPassword = false;
+        this.verifySms = true;
+        this.confirmPass = false;
+      } else {
+        this.error.phoneNumber.bool = true;
+        this.error.phoneNumber.message = 'Առկա են Տեխնիկական խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
+      }
+    });
 
 
   }
@@ -180,9 +234,17 @@ export class SignInComponent implements OnInit {
     if (this.error.sms.bool) {
       return false;
     }
-    /*
-   add function for confirming sms code
-    */
+    this.signInService.confirmSmsCode({phoneNumber: this.passVeryfication.phoneNumber, sms: this.passVeryfication.smsCode})
+      .subscribe((res: any) => {
+      if ( !res.error) {
+        this.forgotPassword = false;
+        this.verifySms = false;
+        this.confirmPass = true;
+      } else {
+        this.error.sms.bool = true;
+        this.error.sms.message = 'Առկա են Տեխնիկական խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
+      }
+    });
   }
 
 
