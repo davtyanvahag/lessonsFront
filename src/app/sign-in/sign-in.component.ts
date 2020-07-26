@@ -147,14 +147,14 @@ export class SignInComponent implements OnInit {
 
   validateSmsCode() {
     if (!this.passVeryfication.smsCode || typeof this.passVeryfication.smsCode === 'undefined' || this.passVeryfication.smsCode.length < 5 || this.passVeryfication.smsCode.length > 5) {
-      this.error.confirmPhone.bool = true;
-      this.error.confirmPhone.message = 'Կոդը պարտադիր դաշտ է';
+      this.error.sms.bool = true;
+      this.error.sms.message = 'Կոդը պարտադիր դաշտ է';
     } else {
-      if (!this.smsValidation(this.passVeryfication.phoneNumber)) {
-        this.error.confirmPhone.bool = true;
-        this.error.confirmPhone.message = 'Կոդը վավեր չէ';
+      if (!this.smsValidation(this.passVeryfication.smsCode)) {
+        this.error.sms.bool = true;
+        this.error.sms.message = 'Կոդը վավեր չէ';
       } else {
-        this.error.confirmPhone.bool = false;
+        this.error.sms.bool = false;
       }
     }
   }

@@ -67,7 +67,7 @@
           <div class="uk-form-field">
             <input value="Հաստատել" class="btn btn-primary" type="button" (click)="verifyPhoneFunc()"/>
           </div>
-          <a class="uk-new-password" href="javascript:void(0)" (click)="forgotPassword = false; verifySms = true; confirmPass = false">Մուտքի էջ</a>
+          <a class="uk-new-password" href="javascript:void(0)" (click)="forgotPassword = false; verifySms = false; confirmPass = false">Մուտքի էջ</a>
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@
             <input value="Ուղարկել նորից" class="btn btn-secondary" type="button" (click)="verifyPhoneFunc()"/>
             <input value="Հաստատել" class="btn btn-primary" type="button" (click)="verifySmsFunc()"/>
           </div>
-          <a class="uk-new-password" href="javascript:void(0)" (click)="forgotPassword = false; verifySms = false; confirmPass = true">Մուտքի էջ</a>
+          <a class="uk-new-password" href="javascript:void(0)" (click)="forgotPassword = false; verifySms = false; confirmPass = false">Մուտքի էջ</a>
         </div>
       </div>
     </div>
@@ -120,7 +120,7 @@
           <div class="uk-form-field">
             <input value="Հաստատել" class="btn btn-primary" type="button" (click)="saveNewPassword()"/>
           </div>
-          <a class="uk-new-password" href="javascript:void(0)" >Մուտքի էջ</a>
+          <a class="uk-new-password" href="javascript:void(0)" (click)="forgotPassword = false; verifySms = false; confirmPass = false" >Մուտքի էջ</a>
         </div>
       </div>
     </div>

@@ -21,6 +21,7 @@ export class SingleComponent implements OnInit {
   backendUrl: string;
   start: boolean;
   modalShowHide: boolean;
+  modalShowHide1: boolean;
   constructor(private myTestsService: MyTestsService,
               private activatedRoute: ActivatedRoute,
               private sharedService: SharedService,
@@ -32,6 +33,7 @@ export class SingleComponent implements OnInit {
     this.backendUrl = environment.apiUrl;
     this.start = false;
     this.modalShowHide = false;
+    this.modalShowHide1 = false;
     this.activeIndex = 0;
     this.activatedRoute.params.subscribe(param => {
       if (param.id) {
@@ -70,6 +72,11 @@ export class SingleComponent implements OnInit {
           this.timeMinutes--;
         } else {
           clearInterval(this.interval);
+          this.modalShowHide1 = true;
+          setTimeout(function() {
+            this.modalShowHide1 = false;
+            this.endTest();
+          }, 2000);
         }
       }
     }, 1000);

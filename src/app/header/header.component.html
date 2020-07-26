@@ -5,7 +5,7 @@
         <img src="assets/images/Logo%20red.png" alt=""/>
       </a>
     </div>
-    <div class="uk-header--right uk-menu-section">
+    <div class="uk-header--right uk-menu-section"  [ngClass]="openMenu ? 'active' : ''">
       <ul class="uk-menu">
         <li class="active">
           <a  href="javascript:void(0)" (click)="navigateTo('')">Գլխավոր էջ</a>
@@ -31,7 +31,7 @@
       </ul>
       <ul class="uk-menu uk-header--menu-logged" *ngIf="isLoggedIn">
         <li class="uk-user-page-link">
-          <a [routerLink]="['/my-page']">
+          <a [routerLink]="['/my-page/my-tests']">
             <i class="fa fa-user uk-user-icon"></i>
             <span>Իմ էջ</span>
             <i class="fa fa-caret-right uk-caret-icon"></i>
@@ -62,7 +62,7 @@
       </ul>
     </div>
     <div class="uk-mobile-btn">
-      <div class="uk-menu-open-btn">
+      <div class="uk-menu-open-btn" [ngClass]="openMenu ? 'active' : ''" (click)="openMenu = !openMenu">
         <span></span>
         <span></span>
         <span></span>

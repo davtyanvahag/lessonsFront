@@ -1,7 +1,7 @@
 
   <h3 class="uk-content-title gray-mobile">
     Ընդհանուր {{total}} միավոր
-    <span class="btn btn-primary float-right" [routerLink]="['/tests']">Նոր թեստեր</span>
+    <span class="btn btn-primary" [routerLink]="['/tests']">Նոր թեստեր</span>
   </h3>
   <div class="uk-content">
     <div class="row uk-row"  *ngIf="orders && orders.length > 0">
@@ -15,7 +15,7 @@
             </div>
             <div class="col-30 text-right uk-points--info">
               <span class="uk-points">{{order.total_point_questons}} միավոր</span>
-              <span class="uk-points--completed">Անցել է {{order.user_total_point_answers ? order.user_total_point_answers : 0}} միավոր</span>
+              <span class="uk-points--completed">Հավաքել է {{order.user_total_point_answers ? order.user_total_point_answers : 0}} միավոր</span>
             </div>
           </div>
           <div class="uk-tests--footer">

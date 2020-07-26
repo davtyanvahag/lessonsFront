@@ -10,6 +10,7 @@ import {SharedService} from '../shared/shared.service';
 export class HeaderComponent implements OnInit {
   @Output() Navigate = new EventEmitter();
   private isLoggedIn: boolean;
+  private openMenu: boolean;
 
   constructor(private router: Router,
               private sharedService: SharedService) {
@@ -18,6 +19,7 @@ export class HeaderComponent implements OnInit {
     });
   }
   ngOnInit() {
+    this.openMenu = false;
     this.sharedService.currentUser().subscribe( (res: any) => {
       if (!res.error && res.user && res.user !== null) {
         this.isLoggedIn = true;
