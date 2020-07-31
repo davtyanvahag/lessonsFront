@@ -2,7 +2,7 @@
   <div class="uk-header--container">
     <div class="uk-header--left">
       <a class="uk-header--logo" href="javascript:void(0)" (click)="navigateTo('')">
-        <img src="assets/images/Logo%20red.png" alt=""/>
+        <img src="assets/images/Logo%20red1.png" alt=""/>
       </a>
     </div>
     <div class="uk-header--right uk-menu-section"  [ngClass]="openMenu ? 'active' : ''">
@@ -40,13 +40,13 @@
         <li>
           <ul class="uk-menu uk-header--menu-edit">
             <li>
-              <a [routerLinkActive]="['color-red']" [routerLink]="['./my-tests']">
+              <a [routerLinkActive]="['color-red']" [routerLink]="['/my-page/my-tests']">
                 <i class="fa fa-check-square-o"></i>
                 Իմ Թեստերը
               </a>
             </li>
             <li>
-              <a [routerLinkActive]="['color-red']" [routerLink]="['./edit-my-account']">
+              <a [routerLinkActive]="['color-red']" [routerLink]="['/my-page/edit-my-account']">
                 <i class="fa fa-cog"></i>
                 Խմբագրել տվյալները
               </a>

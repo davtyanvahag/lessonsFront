@@ -64,7 +64,9 @@
         <div class="col-md-12">
           <div class="uk-form-field">
             <div class="uk-search-field">
-              <input (input)="validateDob()" placeholder="Ծնն․ ամիս/օր/ամսաթիվ *" [ngClass]=" error.dob.bool ? 'border-red' : ''" name="dob" class="form-control" type="text" [(ngModel)]="user.dob">
+              <input (input)="validateDob()" placeholder="Ծնն․ օր/ամիս/տարեթիվ *"
+                     [ngClass]=" error.dob.bool ? 'border-red' : ''" name="dob" class="form-control"
+                     type="date" [(ngModel)]="user.dob">
             </div>
             <p class="color-red" *ngIf="error.dob.bool">{{error.dob.message}}</p>
           </div>

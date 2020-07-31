@@ -17,12 +17,14 @@ export class TestsComponent implements OnInit {
   page: number;
   limit: number;
   init: boolean;
+  openFilter: boolean;
   search: any;
   constructor(private testsService: TestsService) {
   }
 
   ngOnInit() {
     this.init = true;
+    this.openFilter = false;
     this.page = 1;
     this.limit = 6;
     this.search = {

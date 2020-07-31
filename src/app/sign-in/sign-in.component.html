@@ -26,7 +26,7 @@
           <div class="uk-form-field">
             <div class="uk-search-field">
               <input [ngClass]=" error.phoneNumber.bool ? 'border-red' : ''"
-                     (input)="validatePhone()" placeholder="Հեռախոսահամար" class="form-control"
+                     (input)="validatePhone()" placeholder="Հեռախոսահամար՝ +37455677899" class="form-control"
                      type="phone" [(ngModel)]="user.phoneNumber">
             </div>
             <p class="color-red" *ngIf="error.phoneNumber.bool">{{error.phoneNumber.message}}</p>

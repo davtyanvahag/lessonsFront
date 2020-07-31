@@ -101,6 +101,13 @@ export class SignUpComponent implements OnInit {
               this.error.phoneNumber.message = 'Առկա են Տեխնիկական խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
             }
           });
+        } else {
+          if (res.userExist) {
+            this.error.phoneNumber.bool = true;
+            this.error.email.bool = true;
+            this.error.phoneNumber.message = res.message;
+            this.error.email.message = res.message;
+          }
         }
       });
     } else {
@@ -191,12 +198,12 @@ export class SignUpComponent implements OnInit {
       this.error.dob.bool = true;
       this.error.dob.message = 'Ծննդյան ամիս ամսաթիվը պարտադիր դաշտ է, ամիս/օր/տարեթիվ';
     } else {
-      if (!this.validateDate(this.user.dob)) {
-        this.error.dob.bool = true;
-        this.error.dob.message = 'Ծննդյան ամիս ամսաթիվը վավեր չէ';
-      } else {
+      // if (!this.validateDate(this.user.dob)) {
+      //   this.error.dob.bool = true;
+      //   this.error.dob.message = 'Ծննդյան ամիս ամսաթիվը վավեր չէ';
+      // } else {
         this.error.dob.bool = false;
-      }
+      // }
     }
   }
   validatePassword() {

@@ -1,6 +1,6 @@
 <app-header></app-header>
-<main class="uk-main">
-  <section class="pt-3">
+<main class="">
+  <section class="">
     <div class="uk-section-has-sidebar--container" *ngIf="test">
       <div class="row uk-row">
         <div class="col-lg-12">
@@ -45,7 +45,9 @@
                         <div class="col-md-12" *ngFor="let ans of question.answers; let k = index">
                           <div class="uk-option">
                             <div class="uk-checkbox">
-                              <input class="styled" id="uk-checkbox-{{i}}-{{k}}" type="checkbox" name="answer{{i}}_{{k}}" (click)="answer(i, k)">
+                              <input class="styled" id="uk-checkbox-{{i}}-{{k}}" type="checkbox"
+                                     [checked]="answersCkecked[i][k].bool ? 'checked' : ''"
+                                     name="answer{{i}}" (click)="answer(i, k)">
                               <label for="uk-checkbox-{{i}}-{{k}}">
                                 <span class="uk-option--text">{{ans.title}}</span>
                                 <span class="uk-option--image" *ngIf="ans.images">

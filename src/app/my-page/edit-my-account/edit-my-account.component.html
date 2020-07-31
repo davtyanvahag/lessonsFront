@@ -55,12 +55,15 @@
         </div>
         <div class="col-md-6">
           <div class="uk-form-field">
-            <label for="uk-age" [ngClass]=" error.dob.bool ? 'color-red' : ''">Ծնն․ ամիս/օր/ամսաթիվ *</label>
+            <label for="uk-age" [ngClass]=" error.dob.bool ? 'color-red' : ''">Ծնն․ օր/ամիս/տարեթիվ *</label>
             <div class="uk-search-field">
               <input id="uk-age"
                      (input)="validateDob()"
-                     placeholder="Ծնն․ ամիս/օր/ամսաթիվ *" [ngClass]=" error.dob.bool ? 'border-red' : ''"
-                     name="dob" class="form-control" type="text" [(ngModel)]="user.dob">
+                     placeholder="Ծնն․ օր/ամիս/տարեթիվ *"
+                     [ngClass]=" error.dob.bool ? 'border-red' : ''"
+                     name="dob" class="form-control" type="date"
+                     [ngModel] ="user.dob | date:'yyyy-MM-dd'"
+                     (ngModelChange)="user.dob = $event">
             </div>
             <p class="color-red" *ngIf="error.dob.bool">{{error.dob.message}}</p>
           </div>
@@ -115,7 +118,7 @@
           <div class="uk-form-field">
             <label for="uk-company">Կազմակերպություն</label>
             <div class="uk-search-field">
-              <input placeholder="Կազմակերպություն" id="uk-company" class="form-control" type="text">
+              <input placeholder="Կազմակերպություն" id="uk-company" class="form-control" type="text" [(ngModel)]="user.company">
             </div>
           </div>
         </div>

@@ -3,6 +3,13 @@
 .color-red{
   color: #DF342F;
 }
+.uk-section-has-sidebar {
+  padding: 40px 0;
+}
+
+.color-green{
+  color: rgba(26, 147, 17, 0.88)!important;
+}
 
 .border-red{
   border:solid 1px #DF342F;
@@ -74,3 +81,13 @@
 .modal-hide {
   display: none;
 }
+
+
+@media (max-width: 1023.98px) {
+  .uk-section-has-sidebar {
+    padding: 10px 0 48px;
+    background: white;
+    background: linear-gradient(0deg, white 98%, #eeeeee 100%);
+  }
+}
+

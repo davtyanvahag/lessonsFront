@@ -13,6 +13,7 @@ export class SingleComponent implements OnInit {
 
   test: any;
   answerd: any;
+  answersCkecked: any;
   interval;
   testId: any;
   activeIndex: number;
@@ -31,6 +32,7 @@ export class SingleComponent implements OnInit {
 
   ngOnInit() {
     this.backendUrl = environment.apiUrl;
+    this.answersCkecked = [];
     this.start = false;
     this.modalShowHide = false;
     this.modalShowHide1 = false;
@@ -50,8 +52,12 @@ export class SingleComponent implements OnInit {
     this.myTestsService.getUserSingleOrder(this.testId).subscribe( (res: any) => {
       if (!res.error) {
         this.test = res.data;
-        this.test.questionsList.forEach( el => {
+        this.test.questionsList.forEach( (el, i) => {
+          this.answersCkecked.push([]);
           this.answerd.push(false);
+          el.answers.forEach((e, j) => {
+            this.answersCkecked[i].push({bool: false});
+          });
         });
         console.log(this.test);
       } else {
@@ -73,7 +79,7 @@ export class SingleComponent implements OnInit {
         } else {
           clearInterval(this.interval);
           this.modalShowHide1 = true;
-          setTimeout(function() {
+          setTimeout(() => {
             this.modalShowHide1 = false;
             this.endTest();
           }, 2000);
@@ -99,8 +105,20 @@ export class SingleComponent implements OnInit {
   }
 
   answer(index, answerIndex) {
+    console.log(index, answerIndex, this.answersCkecked);
     this.test.questions[index].user_answer_index = answerIndex;
     this.answerd[index] = true;
+    // for (let i = 0; i < this.answersCkecked.length; i++) {
+      for (let j = 0; j < this.answersCkecked[index].length; j++) {
+        if ( answerIndex === j)  {
+          this.answersCkecked[index][j].bool = true;
+        } else {
+          this.answersCkecked[index][j].bool = false;
+        }
+      }
+    // }
+    console.log('verj ::', index, answerIndex, this.answersCkecked);
+
   }
 
 

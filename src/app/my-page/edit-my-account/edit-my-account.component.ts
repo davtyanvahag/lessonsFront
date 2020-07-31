@@ -190,13 +190,20 @@ export class EditMyAccountComponent implements OnInit {
       this.error.dob.bool = true;
       this.error.dob.message = 'Ծննդյան ամիս ամսաթիվը պարտադիր դաշտ է, ամիս/օր/տարեթիվ';
     } else {
-      if (!this.validateDate(this.user.dob)) {
-        this.error.dob.bool = true;
-        this.error.dob.message = 'Ծննդյան ամիս ամսաթիվը վավեր չէ';
-      } else {
+      // if (!this.validateDate(this.user.dob)) {
+      //   this.error.dob.bool = true;
+      //   this.error.dob.message = 'Ծննդյան ամիս ամսաթիվը վավեր չէ';
+      // } else {
         this.error.dob.bool = false;
-      }
+      // }
     }
+  }
+
+  parseDate(dateString: string): Date {
+    if (dateString) {
+      return new Date(dateString);
+    }
+    return null;
   }
 
   validatePassword() {

@@ -3,11 +3,11 @@
   <section class="uk-section-has-sidebar">
     <div class="uk-section-has-sidebar--container">
       <div class="row uk-row">
-        <div class="col-xl-3 col-lg-4 d-none d-lg-block mobile-filter-col">
+        <div class="col-xl-3 col-lg-4 d-none d-lg-block mobile-filter-col" [ngClass]="openFilter ? 'active' : ''">
           <div class="uk-sidebar uk-box-shadow">
             <div class="uk-sidebar--heading">
-              <h3 class="uk-sidebar-title">Դասընթացներ</h3>
-              <span class="uk-mobile-filter d-lg-none">
+              <h3 class="uk-sidebar-title">Թեստեր</h3>
+              <span class="uk-mobile-filter d-lg-none" (click)="openFilter = !openFilter">
                   <span>փակել</span>
                   <div class="filter-close">
                       <span></span>
@@ -52,11 +52,11 @@
         </div>
         <div class="col-xl-9 col-lg-8">
           <div class="uk-content--heading">
-            <h3 class="uk-content-title">Անվանում</h3>
+            <h3 class="uk-content-title">Թեստեր</h3>
             <div class="d-lg-none">
               <span class="uk-mobile-filter">
                   <span>ֆիլտր</span>
-                  <i class="fa fa-sliders" aria-hidden="true"></i>
+                  <i class="fa fa-sliders" aria-hidden="true"   (click)="openFilter = !openFilter"></i>
               </span>
             </div>
           </div>

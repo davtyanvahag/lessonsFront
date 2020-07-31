@@ -1,6 +1,6 @@
 
   <h3 class="uk-content-title gray-mobile">
-    Ընդհանուր {{total}} միավոր
+    Ընդհանուր {{total}} թեստ
     <span class="btn btn-primary" [routerLink]="['/tests']">Նոր թեստեր</span>
   </h3>
   <div class="uk-content">
@@ -31,12 +31,24 @@
             </div>
             <div class="uk-tests--more col-30">
               <a class="btn btn-primary btn-block" [routerLink]="['/my-page/my-tests/single/', order._id]" *ngIf="order.participated === 1">Սկսել</a>
-              <a class="btn btn-secondary btn-block" href="javascript:void(0)" *ngIf="order.participated === 3">Դիտել</a>
+              <a class="btn btn-secondary btn-block" href="javascript:void(0)" (click)=" getCurrentOrder(order._id)" *ngIf="order.participated === 3" >Դիտել</a>
             </div>
           </div>
         </div>
       </div>
-
+      <div class="col-lg-12">
+        <div class="uk-pagination">
+          <app-pagination
+            [count]="total"
+            [page]="page"
+            [perPage]="limit"
+            [pagesToShow]="5"
+            (goPrev)="prev()"
+            (goNext)="next()"
+            (goPage)="currentpage($event)"
+          ></app-pagination>
+        </div>
+      </div>
     </div>
     <div class="row uk-row"  *ngIf="!orders || orders.length === 0">
       <div class="col-12">
@@ -44,17 +56,89 @@
       </div>
     </div>
   </div>
-<div class="ռօո">
-  <div class="uk-pagination">
-    <app-pagination
-      [count]="total"
-      [page]="page"
-      [perPage]="limit"
-      [pagesToShow]="5"
-      (goPrev)="prev()"
-      (goNext)="next()"
-      (goPage)="currentpage($event)"
-    ></app-pagination>
+
+  <div id="myModal" [ngClass]="modalShowHide ? 'modal-show' : 'modal-hide'" class="modal1">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <span class="close" (click)="modalShowHide = false">&times;</span>
+      </div>
+      <div class="modal-body border-top">
+        <div class="uk-tabs">
+          <div class="uk-tabs--part">
+            <div class="uk-tabs--navs" *ngIf="test">
+              <a href="javascript:void(0)" class="uk-tabs--navs-qn "
+                 *ngFor="let question of test.questionsList; let i = index"
+                 [ngClass]="[activeIndex === i ? 'active' : '',
+                 !getTrueOrFalse(question._id) ? 'color-red' : 'color-green']"
+                 (click)="activeIndex = i">
+                Հարց {{i + 1}}
+              </a>
+            </div>
+          </div>
+          <div class="uk-tabs--part" *ngIf="test">
+
+            <!--Tab 1-->
+            <div *ngFor="let question of test.questionsList; let i = index">
+              <div class="uk-tabs--part-content " [ngClass]="activeIndex === i ? 'active' : ''">
+                <div class="uk-tabs--part-heading">
+                  <h3>
+                    {{question.title}} | {{getPoint(question._id)}} միավոր
+                  </h3>
+                  <h4>
+                    Ձեր նշած պատասխանը ՝ {{getIndex(question._id) + 1}} է
+                  </h4>
+                </div>
+                <div class="row uk-row">
+                  <div class="color-red" *ngIf="!getTrueOrFalse(question._id)">Սխալ է</div>
+                  <div class="color-green" *ngIf="getTrueOrFalse(question._id)">Ճիշտ է</div>
+                  <div class="col-md-12" *ngFor="let ans of question.answers; let k = index">
+                    <div class="uk-option">
+                      <div class="uk-checkbox">
+                        <i class="fa fa-check color-green" *ngIf="getCorrectAnswerIndex(question._id) === k"></i>
+                        <span class="uk-option--text">{{ans.title}}</span>
+                        <span class="uk-option--image" *ngIf="ans.images">
+                            <img *ngIf="ans.images.filePath" src="{{backendUrl + ans.images.filePath}}" alt=""/>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="uk-option--nav">
+                      <div class="uk-option--nav-part">
+                        <ul class="uk-option--nav-links">
+                          <li *ngIf="i > 0">
+                            <a href="javascript:void(0)"
+                               (click)="activeIndex = activeIndex - 1">
+                              <i class="fa fa-long-arrow-left mr-2"></i>
+                              Նախորդը
+                            </a>
+                          </li>
+                          <li *ngIf="i < test.questionsList.length - 1">
+                            <a href="javascript:void(0)"
+                               (click)="activeIndex = activeIndex + 1">
+                              Հաջորդը
+                              <i class="fa fa-long-arrow-right ml-2"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--Tab 1-->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer text-right  border-top p-2">
+        <button class="btn btn-secondary"  (click)="modalShowHide = false">Փակել</button>
+      </div>
+    </div>
+
   </div>
-</div>
 

@@ -27,6 +27,14 @@ export class MyTestsService {
     );
   }
 
+  getOneForUserAnswered(id) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
+    return this.http.get(`${environment.apiUrl}`  + '/orders/getOneForUserAnswered/' + id, { headers: headers }).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
   answerUpdate(obj) {
     const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
     return this.http.post(`${environment.apiUrl}`  + '/orders/answerUpdate/', obj, { headers: headers }).pipe(
@@ -36,16 +44,19 @@ export class MyTestsService {
   }
 
   handleError(error) {
-    let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // client-side error
-      errorMessage = `Error: ${error.error.message}`;
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
     } else {
-      // server-side error
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      // The backend returned an unsuccessful response code.
+      // The response body may contain clues as to what went wrong.
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
     }
-    window.alert(errorMessage);
-    return throwError(errorMessage);
+    // Return an observable with a user-facing error message.
+    return throwError(
+      'Something bad happened; please try again later.');
   }
 
 }
