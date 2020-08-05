@@ -9,8 +9,8 @@ import {SharedService} from '../shared/shared.service';
 })
 export class HeaderComponent implements OnInit {
   @Output() Navigate = new EventEmitter();
-  private isLoggedIn: boolean;
-  private openMenu: boolean;
+  isLoggedIn: boolean;
+  openMenu: boolean;
 
   constructor(private router: Router,
               private sharedService: SharedService) {
