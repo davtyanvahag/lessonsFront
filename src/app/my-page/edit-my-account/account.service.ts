@@ -37,7 +37,9 @@ export class AccountService {
   }
 
   getCurrenUser() {
-    return this.http.get(environment.apiUrl + '/users/getCurrentUser', {headers: this.headers}).pipe(
+    console.log(localStorage.getItem('token'))
+    const headers = new HttpHeaders({'Content-Type': 'application/json', token: localStorage.getItem('token')});
+    return this.http.get(environment.apiUrl + '/users/getCurrentUser', {headers: headers}).pipe(
       retry(1),
       catchError(this.handleError)
     );
