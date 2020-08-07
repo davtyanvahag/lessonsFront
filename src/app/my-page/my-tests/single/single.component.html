@@ -51,7 +51,7 @@
                               <label for="uk-checkbox-{{i}}-{{k}}">
                                 <span class="uk-option--text">{{ans.title}}</span>
                                 <span class="uk-option--image" *ngIf="ans.images">
-                                  <img *ngIf="ans.images.filePath" src="{{backendUrl + ans.images.filePath}}" alt=""/>
+                                  <img *ngIf="ans.images.filePath" src="{{backendUrl +'/' + ans.images.filePath}}" alt=""/>
                               </span>
                               </label>
                             </div>

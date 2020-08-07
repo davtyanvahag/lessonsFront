@@ -87,22 +87,25 @@
                     {{question.title}} | {{getPoint(question._id)}} միավոր
                   </h3>
                   <h4>
-                    Ձեր նշած պատասխանը ՝ {{getIndex(question._id) + 1}} է
+                    Ձեր նշած պատասխանը ՝ {{getIndex(question._id) + 1}}ը
                   </h4>
                 </div>
                 <div class="row uk-row">
                   <div class="color-red" *ngIf="!getTrueOrFalse(question._id)">Սխալ է</div>
                   <div class="color-green" *ngIf="getTrueOrFalse(question._id)">Ճիշտ է</div>
                   <div class="col-md-12" *ngFor="let ans of question.answers; let k = index">
-                    <div class="uk-option">
-                      <div class="uk-checkbox">
-                        <i class="fa fa-check color-green" *ngIf="getCorrectAnswerIndex(question._id) === k"></i>
-                        <span class="uk-option--text">{{ans.title}}</span>
-                        <span class="uk-option--image" *ngIf="ans.images">
-                            <img *ngIf="ans.images.filePath" src="{{backendUrl + ans.images.filePath}}" alt=""/>
-                        </span>
+<!--                    <div class="uk-option">-->
+                      <div class="row">
+                        <div class="col-12">
+                          <i class="fa fa-check color-green" *ngIf="getCorrectAnswerIndex(question._id) === k"></i>
+                          <span>{{k + 1}}) {{ans.title}}</span>
+
+                        </div>
+                        <div class="col-6" *ngIf="ans.images">
+                            <img src="{{backendUrl +'/' + ans.images.filePath}}" class="img-thumbnail" alt=""/>
+                        </div>
                       </div>
-                    </div>
+<!--                    </div>-->
                   </div>
                 </div>
                 <div class="row">
