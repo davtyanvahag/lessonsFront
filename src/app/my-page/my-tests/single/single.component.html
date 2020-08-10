@@ -47,7 +47,7 @@
                             <div class="uk-checkbox">
                               <input class="styled" id="uk-checkbox-{{i}}-{{k}}" type="checkbox"
                                      [checked]="answersCkecked[i][k].bool ? 'checked' : ''"
-                                     name="answer{{i}}" (click)="answer(i, k)">
+                                     name="answer{{i}}" (click)="answer(i, k, question._id)">
                               <label for="uk-checkbox-{{i}}-{{k}}">
                                 <span class="uk-option--text">{{ans.title}}</span>
                                 <span class="uk-option--image" *ngIf="ans.images">

@@ -104,8 +104,10 @@ export class SingleComponent implements OnInit {
     });
   }
 
-  answer(index, answerIndex) {
-    console.log(index, answerIndex, this.answersCkecked);
+  answer(ind, answerIndex, id) {
+    // console.log(index, answerIndex, this.answersCkecked);
+    const index = this.test.questions.findIndex(el => el.q_id === id);
+
     this.test.questions[index].user_answer_index = answerIndex;
     this.answerd[index] = true;
     // for (let i = 0; i < this.answersCkecked.length; i++) {
