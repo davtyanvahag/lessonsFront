@@ -34,10 +34,10 @@
         <div class="col-12 mt-5">
           <div class="uk-pagination">
             <ul class="uk-pagination--dots m-auto" *ngIf="total > 0">
-              <li class="active" (click)="prev()">
+              <li class="active" (click)="prev()" [ngClass]="page === 1 ? 'diasabled' : ''">
                 <a class="" href="javascript:void(0);"><</a>
               </li>
-              <li class="active" (click)="next()">
+              <li class="active" (click)="next()" [ngClass]="total >= page * news.length ? 'diasabled' : ''" >
                 <a class="page-link" href="javascript:void(0);">></a>
               </li>
             </ul>

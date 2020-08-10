@@ -242,7 +242,7 @@ export class SignInComponent implements OnInit {
         this.confirmPass = true;
       } else {
         this.error.sms.bool = true;
-        this.error.sms.message = 'Առկա են Տեխնիկական խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
+        this.error.sms.message = 'Սխալ են մուտքագրված տվյալները՝ հեռախոսահամարը կամ կոդը';
       }
     });
   }

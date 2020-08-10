@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoaderComponent } from './loader/loader.component';
 import {LoaderInterceptorService} from './loader/loader-interceptor.service';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {LoaderInterceptorService} from './loader/loader-interceptor.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    GoogleMapsModule,
     AppRoutingModule
   ],
   providers: [HttpClientModule,

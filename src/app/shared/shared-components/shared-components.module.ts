@@ -5,11 +5,12 @@ import {FooterComponent} from '../../footer/footer.component';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {PaginationComponent} from '../../pagination/pagination.component';
+import {GoogleMapsModule} from '@angular/google-maps';
 
 
 
 @NgModule({
-  imports: [ CommonModule, RouterModule, FormsModule],
+    imports: [CommonModule, RouterModule, FormsModule, GoogleMapsModule],
   declarations: [
     HeaderComponent,
     PaginationComponent,
