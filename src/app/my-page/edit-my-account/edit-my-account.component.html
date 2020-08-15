@@ -62,6 +62,7 @@
                      placeholder="Ծնն․ օր/ամիս/տարեթիվ *"
                      [ngClass]=" error.dob.bool ? 'border-red' : ''"
                      name="dob" class="form-control" type="date"
+                     [min]="getDate()"
                      [ngModel] ="user.dob | date:'yyyy-MM-dd'"
                      (ngModelChange)="user.dob = $event">
             </div>

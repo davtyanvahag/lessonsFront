@@ -40,7 +40,6 @@ export class SigngleTestComponent implements OnInit {
   }
 
   order(orderStatus) {
-    if (orderStatus)
     if (localStorage.getItem('token')) {
       this.sharedService.currentUser().subscribe( (res: any) => {
         if (!res.error && res.user && res.user !== null) {
@@ -48,12 +47,16 @@ export class SigngleTestComponent implements OnInit {
           this.userOrder.order_price = this.singleTest.price;
           if (this.singleTest.price > 0) {
             this.userOrder.order_status = 1;
-            // order function payment
             this.singleTestService.order(this.userOrder).subscribe( (resp: any) => {
               if (!resp.error) {
+                // order function payment
                 this.singleTestService.updateUsedSum({_id: this.singleTest._id}).subscribe( (response: any) => {
                   if (!response.error) {
-                    this.router.navigate(['/my-page/my-tests']);
+                    this.singleTestService.updateUserOrderLastDate({_id: res.user._id}).subscribe( (r: any) => {
+                      if (!r.error) {
+                        this.router.navigate(['/my-page/my-tests']);
+                      }
+                    });
                   }
                 });
               }
@@ -62,9 +65,17 @@ export class SigngleTestComponent implements OnInit {
             this.userOrder.order_status = 5;
             this.singleTestService.order(this.userOrder).subscribe( (resp: any) => {
               if (!resp.error) {
-                this.singleTestService.updateUsedSum({_id: this.singleTest._id}).subscribe( (response: any) => {
-                  if (!response.error) {
-                    this.router.navigate(['/my-page/my-tests']);
+                this.singleTestService.order(this.userOrder).subscribe( (re: any) => {
+                  if (!re.error) {
+                  this.singleTestService.updateUsedSum({_id: this.singleTest._id}).subscribe( (response: any) => {
+                    if (!response.error) {
+                      this.singleTestService.updateUserOrderLastDate({_id: res.user._id}).subscribe( (r: any) => {
+                        if (!r.error) {
+                          this.router.navigate(['/my-page/my-tests']);
+                        }
+                      });
+                    }
+                  });
                   }
                 });
               }

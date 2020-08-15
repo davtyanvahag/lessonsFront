@@ -2,7 +2,7 @@
   <div class="uk-header--container">
     <div class="uk-header--left">
       <a class="uk-header--logo" href="javascript:void(0)" (click)="navigateTo('')">
-        <img src="assets/images/Logo%20red1.png" alt=""/>
+        <img src="assets/images/logo.svg" alt=""/>
       </a>
     </div>
     <div class="uk-header--right uk-menu-section"  [ngClass]="openMenu ? 'active' : ''">
@@ -23,15 +23,15 @@
       <div class="uk-menu-divider"></div>
       <ul class="uk-menu uk-header--menu-sign-up " *ngIf="!isLoggedIn">
         <li>
-          <a [routerLink]="['/sign-in']">Մուտք</a>
+          <a [routerLink]="['/sign-in']" (click)="openMenu = false">Մուտք</a>
         </li>
         <li>
-          <a [routerLink]="['/sign-up']">Գրանցվել</a>
+          <a [routerLink]="['/sign-up']" (click)="openMenu = false">Գրանցվել</a>
         </li>
       </ul>
       <ul class="uk-menu uk-header--menu-logged" *ngIf="isLoggedIn">
         <li class="uk-user-page-link">
-          <a [routerLink]="['/my-page/my-tests']">
+          <a [routerLink]="['/my-page/my-tests']"  (click)="openMenu = false">
             <i class="fa fa-user uk-user-icon"></i>
             <span>Իմ էջ</span>
             <i class="fa fa-caret-right uk-caret-icon"></i>
@@ -40,19 +40,19 @@
         <li>
           <ul class="uk-menu uk-header--menu-edit">
             <li>
-              <a [routerLinkActive]="['color-red']" [routerLink]="['/my-page/my-tests']">
+              <a [routerLinkActive]="['color-red']" [routerLink]="['/my-page/my-tests']"  (click)="openMenu = false">
                 <i class="fa fa-check-square-o"></i>
                 Իմ Թեստերը
               </a>
             </li>
             <li>
-              <a [routerLinkActive]="['color-red']" [routerLink]="['/my-page/edit-my-account']">
+              <a [routerLinkActive]="['color-red']" [routerLink]="['/my-page/edit-my-account']"  (click)="openMenu = false">
                 <i class="fa fa-cog"></i>
                 Խմբագրել տվյալները
               </a>
             </li>
             <li>
-              <a href="javascript:void(0)" (click)="logout()">
+              <a href="javascript:void(0)" (click)="logout(); openMenu = false">
                 <i class="fa fa-sign-out"></i>
                 Դուրս գալ
               </a>

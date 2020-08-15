@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateTo(element: string) {
+    this.openMenu = false;
     this.router.navigateByUrl('/home', { state: {id: element} });
     this.Navigate.emit(element);
   }

@@ -28,6 +28,14 @@ export class SingleTestService {
     );
   }
 
+  updateUserOrderLastDate(obj) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
+    return this.http.put(environment.apiUrl + '/users/update-order', obj, { headers: headers}).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
   updateUsedSum(obj) {
     const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
     return this.http.put(environment.apiUrl + '/tests/updateUsedSum', obj, { headers: headers}).pipe(
@@ -39,13 +47,13 @@ export class SingleTestService {
   handleError(error) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      console.error('An error occurred:', error.error.message);
+      // console.error('An error occurred:', error.error.message);
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+      // console.error(
+      //   `Backend returned code ${error.status}, ` +
+      //   `body was: ${error.error}`);
     }
     // Return an observable with a user-facing error message.
     return throwError(

@@ -1,0 +1,16 @@
+<section id="news" class="uk-news--section">
+  <div class="container">
+    <div class="uk-section-heading">
+      <h2 class="uk-section-title">
+        ՄԵՐ ՄԱՍԻՆ
+      </h2>
+    </div>
+  </div>
+  <div class=" uk-news--section-bg" style="background-image: url('../../../assets/images/news/NEWS.png')">
+    <div class="container">
+      <div class="row uk-row" *ngIf="about">
+        <p [innerHTML]="about.description"></p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -5,7 +5,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="uk-footer--col" *ngIf="about">
             <a class="uk-footer--logo" href="">
-              <img src="assets/images/Logo%20white.png" alt=""/>
+              <img src="assets/images/logo-white.svg" alt=""/>
             </a>
             <h3 class="uk-footer--title">
               {{about.title}}
@@ -40,7 +40,9 @@
         <div class="col-lg-5 col-md-12">
           <div class="uk-footer--col">
             <div class="uk-footer--map">
-              <google-map>
+              <google-map
+                height="500px"
+                width="100%">
                 <map-marker
                   *ngFor="let marker of markers"
                   [position]="marker.position"

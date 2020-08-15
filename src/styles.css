@@ -11,6 +11,10 @@
   color: rgba(26, 147, 17, 0.88)!important;
 }
 
+.uk-header {
+  z-index: 9999;
+}
+
 .border-red{
   border:solid 1px #DF342F;
 }
@@ -84,10 +88,24 @@
 
 
 @media (max-width: 1023.98px) {
+
+  .uk-header {
+    z-index: 9999;
+  }
+
   .uk-section-has-sidebar {
     padding: 10px 0 48px;
     background: white;
     background: linear-gradient(0deg, white 98%, #eeeeee 100%);
+  }
+
+  .modal-content {
+    border-radius: 10px;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%;
   }
 }
 

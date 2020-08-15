@@ -257,4 +257,8 @@ export class EditMyAccountComponent implements OnInit {
       return false;
     }
   }
+
+  getDate() {
+    return new Date();
+  }
 }

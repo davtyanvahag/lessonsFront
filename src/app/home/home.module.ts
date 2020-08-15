@@ -12,6 +12,7 @@ import {TestsService} from './tests/tests.service';
 import {SliderService} from './slider/slider.service';
 import {NewsService} from './news/news.service';
 import {SharedComponentsModule} from '../shared/shared-components/shared-components.module';
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {SharedComponentsModule} from '../shared/shared-components/shared-compone
     HomeComponent,
     SliderComponent,
     NewsComponent,
-    TestsComponent],
+    TestsComponent,
+    AboutComponent],
   imports: [
     CommonModule,
     // CarouselModule,

@@ -6,18 +6,33 @@
         <div class="col-lg-12">
           <div class="uk-tab-content">
             <div class="uk-tab-content--inner">
-              <div class="uk-content--heading gray-mobile">
-                <h3 class="uk-content-title" *ngIf="test.testsList">
-                  {{test.testsList.title}} <span class="uk-content-title--span">|</span>
-                  {{test.total_point_questons}} միավոր
-                </h3>
-                <span class="uk-option--time" *ngIf="start">
-                    <i class="fa fa-clock-o"></i>
-                    {{timeMinutes}}:{{timeSeconds}}
-                </span>
-                <button class="btn btn-primary" *ngIf="!start" (click)="getStarted()">
-                    Սկսել
-                </button>
+              <div class=" gray-mobile">
+                <div class="row">
+                  <div class="col-md-8">
+                    <h3 class="uk-content-title" *ngIf="test.testsList">
+                      {{test.testsList.title}} <span class="uk-content-title--span">|</span>
+                      {{test.total_point_questons}} միավոր
+                    </h3>
+                    <div *ngIf="!start">
+                      Խնդրում ենք սեխմել "Սկսել" կոճակը, թեստը սկսելու համար
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-6"  *ngIf="start">
+                    <input class="btn btn-primary mr-1" type="button" value="Ավարտ" (click)="modalShowHide = true"/>
+
+                  </div>
+                  <div class="col-md-2 col-6">
+                    <span class="uk-option--time" *ngIf="start">
+                        <i class="fa fa-clock-o"></i>
+                          {{timeMinutes}}:{{timeSeconds}}
+                    </span>
+                    <button class="btn btn-primary" *ngIf="!start" (click)="getStarted()">
+                      Սկսել
+                    </button>
+                  </div>
+                </div>
+
+
               </div>
               <div class="uk-tabs" *ngIf="start">
                 <div class="uk-tabs--part">
@@ -70,6 +85,10 @@
                                     Նախորդը
                                   </a>
                                 </li>
+                              </ul>
+                            </div>
+                            <div class="uk-option--nav-part">
+                              <ul class="uk-option--nav-links">
                                 <li *ngIf="i < test.questionsList.length - 1">
                                   <a href="javascript:void(0)"
                                      (click)="activeIndex = activeIndex + 1">
@@ -79,9 +98,6 @@
                                 </li>
                               </ul>
                             </div>
-                            <div class="uk-option--nav-part">
-                              <input class="btn btn-primary" type="button" value="Ավարտ" (click)="modalShowHide = true"/>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -90,9 +106,7 @@
                   <!--Tab 1-->
                 </div>
               </div>
-              <div *ngIf="!start">
-                Խնդրում ենք սեխմել "Սկսել" կոճակը, թեստը սկսելու համար
-              </div>
+
             </div>
           </div>
         </div>

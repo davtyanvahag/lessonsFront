@@ -16,7 +16,7 @@ export class TestsComponent implements OnInit {
 
   ngOnInit() {
     this.page = 1;
-    this.limit = 10;
+    this.limit = 6;
     this.getTests();
   }
 

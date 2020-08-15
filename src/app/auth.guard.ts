@@ -24,24 +24,24 @@ export class AuthGuard implements CanActivate {
     if (localStorage.getItem('token') && localStorage.getItem('token') !== null) {
       const token = localStorage.getItem('token');
       this.headers = new HttpHeaders({'Content-Type': 'application/json', 'token': token});
-      console.log(this.headers);
+      // console.log(this.headers);
       return this.http.get(`${environment.apiUrl}`  + '/users/getCurrentUser', { headers: this.headers }).pipe(
         first(),
         map((res: any) => {
             if (res.error) {
-              console.log('DUS QCII')
+              // console.log('DUS QCII')
               localStorage.removeItem('token');
               this.sharedService.loggedInStatus(false);
               this.router.navigate(['/sign-in']);
               return false;
             } else {
-              console.log('aaaa');
+              // console.log('aaaa');
               this.sharedService.loggedInStatus(true);
               return true;
             }
         }));
     } else {
-      console.log('res4 :::');
+      // console.log('res4 :::');
       this.sharedService.loggedInStatus(false);
       this.router.navigate(['/sign-in']);
       return false;

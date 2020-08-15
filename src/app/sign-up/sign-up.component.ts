@@ -90,10 +90,10 @@ export class SignUpComponent implements OnInit {
       console.log(this.user);
       this.user.gender = Number(this.user.gender);
       this.signUpService.signUp(this.user).subscribe((res: any) => {
-        console.log('Create user::: ', res)
+        console.log('Create user::: ', res);
         if ( !res.error) {
           this.signUpService.sendSms({phoneNumber: this.user.phoneNumber}).subscribe((resp: any) => {
-            console.log('Sms user::: ', resp)
+            console.log('Sms user::: ', resp);
             if ( !resp.error) {
               this.step = 2;
             } else {
@@ -122,7 +122,7 @@ export class SignUpComponent implements OnInit {
   confirmCode() {
     if (!this.sms || typeof this.sms === 'undefined' || this.sms.length < 5 || this.sms.length > 5) {
       this.error.sms.bool = true;
-      this.error.sms.message = 'Կոդը պարտադիր դաշտ է'
+      this.error.sms.message = 'Կոդը պարտադիր դաշտ է';
       return false;
     } else {
       if (!this.smsValidation(this.sms)) {
@@ -239,6 +239,10 @@ export class SignUpComponent implements OnInit {
     } else {
       return false;
     }
+  }
+
+  getDate() {
+    return new Date();
   }
 
 }
