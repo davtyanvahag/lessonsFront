@@ -32,6 +32,6 @@ import {LoaderInterceptorService} from '../loader/loader-interceptor.service';
       multi: true
     }
   ],
-  exports: [LoaderInterceptorService]
+  exports: []
 })
 export class TestsModule { }
