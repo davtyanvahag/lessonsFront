@@ -28,6 +28,14 @@ export class SingleTestService {
     );
   }
 
+  paymanet(obj) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
+    return this.http.post(environment.apiUrl + '/orders/paymanet', obj, { headers: headers}).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
   updateUserOrderLastDate(obj) {
     const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
     return this.http.put(environment.apiUrl + '/users/update-order', obj, { headers: headers}).pipe(

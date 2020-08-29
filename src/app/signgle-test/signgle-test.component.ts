@@ -49,12 +49,18 @@ export class SigngleTestComponent implements OnInit {
             this.userOrder.order_status = 1;
             this.singleTestService.order(this.userOrder).subscribe( (resp: any) => {
               if (!resp.error) {
-                // order function payment
-                this.singleTestService.updateUsedSum({_id: this.singleTest._id}).subscribe( (response: any) => {
-                  if (!response.error) {
-                    this.singleTestService.updateUserOrderLastDate({_id: res.user._id}).subscribe( (r: any) => {
-                      if (!r.error) {
-                        this.router.navigate(['/my-page/my-tests']);
+                console.log(resp.data.order_id)
+                this.singleTestService.paymanet({
+                  order_id: resp.data.order_id
+                }).subscribe( (re: any) => {
+                  if (!re.error) {
+                    this.singleTestService.updateUsedSum({_id: this.singleTest._id}).subscribe( (response: any) => {
+                      if (!response.error) {
+                        this.singleTestService.updateUserOrderLastDate({_id: res.user._id}).subscribe( (r: any) => {
+                          if (!r.error) {
+                            this.router.navigate(['/my-page/my-tests']);
+                          }
+                        });
                       }
                     });
                   }

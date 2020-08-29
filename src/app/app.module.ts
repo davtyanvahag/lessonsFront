@@ -4,15 +4,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LoaderComponent } from './loader/loader.component';
-import {LoaderInterceptorService} from './loader/loader-interceptor.service';
-import { GoogleMapsModule } from '@angular/google-maps'
+import {HttpClientModule } from '@angular/common/http';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoaderComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -20,12 +17,7 @@ import { GoogleMapsModule } from '@angular/google-maps'
     GoogleMapsModule,
     AppRoutingModule
   ],
-  providers: [HttpClientModule,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoaderInterceptorService,
-      multi: true
-    }],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent],
   exports: [HttpClientModule, BrowserAnimationsModule]
 

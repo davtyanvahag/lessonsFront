@@ -9,10 +9,13 @@ import { ɵs } from '@ng-select/ng-select';
 import { TestsRoutingModule } from './tests-routing.module';
 import { TestsComponent } from './tests.component';
 import { SingleComponent } from './single/single.component';
+import {LoaderComponent} from '../loader/loader.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {LoaderInterceptorService} from '../loader/loader-interceptor.service';
 
 
 @NgModule({
-  declarations: [TestsComponent, SingleComponent],
+  declarations: [TestsComponent, SingleComponent, LoaderComponent],
   imports: [
     CommonModule,
     SharedComponentsModule,
@@ -22,7 +25,13 @@ import { SingleComponent } from './single/single.component';
   ],
   providers: [
     NgSelectConfig,
-    ɵs
-  ]
+    ɵs,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoaderInterceptorService,
+      multi: true
+    }
+  ],
+  exports: [LoaderInterceptorService]
 })
 export class TestsModule { }

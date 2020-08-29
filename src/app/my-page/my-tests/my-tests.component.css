@@ -49,3 +49,15 @@
 .modal-hide {
   display: none;
 }
+
+.uk-completed-test-green .uk-tests--box{
+  background-color: rgba(26, 147, 17, 0.88)!important;
+  color: #fff;
+}
+.uk-completed-test-green .uk-points{
+  color: #fff!important;
+}
+
+.uk-completed-test-green .uk-doted-title:after{
+  background-color: #fff;
+}

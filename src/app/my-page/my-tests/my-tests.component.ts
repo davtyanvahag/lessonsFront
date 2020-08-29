@@ -86,4 +86,8 @@ export class MyTestsComponent implements OnInit {
     return this.test.questions[index].answer_index;
   }
 
+  getPerc(data) {
+    return Math.ceil((data.user_total_point_answers * 100) / data.total_point_questons);
+  }
+
 }
