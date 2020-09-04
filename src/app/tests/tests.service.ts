@@ -47,7 +47,7 @@ export class TestsService {
   }
 
   getTestsAll(page, limit, obj) {
-    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this.http.post(environment.apiUrl + '/tests/get-all-front/' + page + '/' + limit, obj, { headers: headers}).pipe(
       retry(1),
       catchError(this.handleError)

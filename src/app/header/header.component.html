@@ -7,17 +7,23 @@
     </div>
     <div class="uk-header--right uk-menu-section"  [ngClass]="openMenu ? 'active' : ''">
       <ul class="uk-menu">
-        <li class="active">
-          <a  href="javascript:void(0)" (click)="navigateTo('')">Գլխավոր էջ</a>
+        <li>
+          <a  [routerLink]="['/about']" [routerLinkActive]="['active']">Մեր Մասին</a>
         </li>
         <li>
-          <a  href="javascript:void(0)" (click)="navigateTo('news')">Նորություններ</a>
+          <a  href="javascript:void(0)" (click)="navigateTo('news')"  [routerLinkActive]="['active']">Նորություններ</a>
         </li>
         <li>
-          <a  href="javascript:void(0)" (click)="navigateTo('tests')">Անվճար թեստեր</a>
+          <a   [routerLink]="['/lessons']"  [routerLinkActive]="['active']">Դասընթացներ</a>
         </li>
         <li>
-          <a  href="javascript:void(0)" (click)="navigateTo('contacts')">Կոնտակտներ</a>
+          <a  [routerLink]="['/tests']"  [routerLinkActive]="['active']">Թեստեր</a>
+        </li>
+        <li>
+          <a  [routerLink]="['/rules']"  [routerLinkActive]="['active']">Կանոններ</a>
+        </li>
+        <li>
+          <a  href="javascript:void(0)" (click)="navigateTo('contacts')"  [routerLinkActive]="['active']">Կոնտակտներ</a>
         </li>
       </ul>
       <div class="uk-menu-divider"></div>

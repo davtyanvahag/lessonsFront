@@ -31,10 +31,10 @@ export class TestsComponent implements OnInit {
       title: '',
       categoryId: '',
       subCategoryId: ''
-    }
+    };
+    this.getTests();
     this.getSpecialties('');
     this.getSubSpecialties({name: '', category_id: ''});
-    this.getTests();
   }
 
   getTests() {

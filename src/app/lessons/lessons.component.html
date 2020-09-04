@@ -1,0 +1,19 @@
+<app-header ></app-header>
+<main class="uk-main">
+  <section id="news" class="uk-news--section">
+    <div class="container">
+      <div class="uk-section-heading">
+        <h2 class="uk-section-title" *ngIf="lessons">
+          {{lessons.title}}
+        </h2>
+      </div>
+    </div>
+    <div class=" uk-news--section-bg">
+      <div class="container">
+        <div class="row uk-row" *ngIf="lessons">
+          <p [innerHTML]="lessons.description"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

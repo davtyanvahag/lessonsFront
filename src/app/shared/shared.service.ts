@@ -49,6 +49,22 @@ export class SharedService {
     );
   }
 
+  getRules() {
+    return this.http.get(environment.apiUrl + '/rules/get-user-side').pipe(
+      retry(1),
+      catchError(this.handleError)
+
+    );
+  }
+
+  getLessons() {
+    return this.http.get(environment.apiUrl + '/lessons/get-user-side').pipe(
+      retry(1),
+      catchError(this.handleError)
+
+    );
+  }
+
   handleError(error) {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

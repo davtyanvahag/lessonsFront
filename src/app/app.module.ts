@@ -9,7 +9,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,10 @@
+<app-header (Navigate)="navigateTo($event)"></app-header>
+<main class="uk-main">
 <section id="news" class="uk-news--section">
   <div class="container">
     <div class="uk-section-heading">
-      <h2 class="uk-section-title">
-        ՄԵՐ ՄԱՍԻՆ
+      <h2 class="uk-section-title" *ngIf="about">
+        {{about.title}}
       </h2>
     </div>
   </div>
@@ -14,3 +16,4 @@
     </div>
   </div>
 </section>
+</main>
