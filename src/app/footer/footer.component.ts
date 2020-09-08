@@ -10,7 +10,7 @@ export class FooterComponent implements OnInit {
   contacts: any;
   about: any;
   markers: any;
-
+  center: google.maps.LatLngLiteral;
   constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
@@ -18,6 +18,10 @@ export class FooterComponent implements OnInit {
     this.sharedService.getContacts().subscribe((res: any) => {
       if ( !res.error ) {
         this.contacts = res.data[0];
+        this.center = {
+          lat: Number(this.contacts.address[0].lat),
+          lng: Number(this.contacts.address[0].long),
+        };
         this.contacts.address.forEach(el => {
           this.markers.push({
             position: {
@@ -26,9 +30,8 @@ export class FooterComponent implements OnInit {
             },
             label: {
               color: 'red',
-              text: 'Marker label ' + (this.markers.length + 1),
+              text: '',
             },
-            title: 'Marker title ' + (this.markers.length + 1),
             options: { animation: google.maps.Animation.BOUNCE },
           });
         });
