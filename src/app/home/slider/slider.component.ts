@@ -19,7 +19,11 @@ export class SliderComponent implements OnInit, AfterViewInit {
     interval: {timing: 5000, initialDelay: 2000},
     loop: true,
     touch: true,
-    velocity: 0.2
+    velocity: 0.2,
+    point: {
+      visible: true,
+      hideOnSingleSlide: true
+    }
   };
   slideNo = 0;
   withAnim = true;
