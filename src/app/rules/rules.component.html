@@ -1,6 +1,6 @@
 <app-header ></app-header>
 <main class="uk-main">
-  <section id="news" class="uk-news--section">
+  <section id="news" class="uk-news--section ">
     <div class="container">
       <div class="uk-section-heading">
         <h2 class="uk-section-title" *ngIf="rules">
@@ -10,10 +10,11 @@
     </div>
     <div class=" uk-news--section-bg">
       <div class="container">
-        <div class="row uk-row" *ngIf="rules">
+        <div class="" *ngIf="rules">
           <p [innerHTML]="rules.description"></p>
         </div>
       </div>
     </div>
   </section>
 </main>
+<app-footer></app-footer>
