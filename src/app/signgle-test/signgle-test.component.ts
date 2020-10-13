@@ -53,7 +53,8 @@ export class SigngleTestComponent implements OnInit {
                 const hrefUrl = document.location.protocol + '//' + document.location.hostname + '/my-page';
                 this.singleTestService.paymanet({
                   url: hrefUrl,
-                  price: this.userOrder.order_price
+                  price: this.userOrder.order_price,
+                  orderid: resp.data.order_id
                 }).subscribe( (re: any) => {
                   const data = JSON.parse(re.data);
                   if (!re.error) {
