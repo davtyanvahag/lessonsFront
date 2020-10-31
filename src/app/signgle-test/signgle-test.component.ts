@@ -62,7 +62,7 @@ export class SigngleTestComponent implements OnInit {
                       if (!response.error) {
                         this.singleTestService.updateUserOrderLastDate({_id: res.user._id, order_id: data.orderId}).subscribe( (r: any) => {
                           if (!r.error) {
-                            window.open(data.formUrl, '_blank');
+                            window.location.assign(data.formUrl);
                           }
                         });
                       }

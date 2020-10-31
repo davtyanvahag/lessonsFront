@@ -32,6 +32,9 @@
             <div class="uk-tests--more col-30">
               <a class="btn btn-primary btn-block" [routerLink]="['/my-page/my-tests/single/', order._id]" *ngIf="order.participated === 1">Սկսել</a>
               <a class="btn btn-secondary btn-block" href="javascript:void(0)" (click)=" getCurrentOrder(order._id)" *ngIf="order.participated === 3" >Դիտել</a>
+              <a class="btn btn-secondary btn-block" href="javascript:void(0)" (click)=" getCurrentOrder1(order._id)" *ngIf="order.participated === 3" >
+                <i class="fa fa-eye"></i>
+              </a>
             </div>
           </div>
         </div>
@@ -56,6 +59,81 @@
       </div>
     </div>
   </div>
+
+
+<!--  hashvetvutyun modal-->
+  <div id="myModal1" [ngClass]="modalShowHide1 ? 'modal-show' : 'modal-hide'" class="modal1">
+    <div class="modal-content">
+      <div class="modal-header clearfix">
+        <span class="close" (click)="modalShowHide1 = false">&times;</span>
+      </div>
+      <div class="modal-body border-top" *ngIf="test">
+        <div class="row">
+          <table class="table table-bordered">
+            <tr>
+              <td colspan="6" class="text-center"><b>Հաշվետվություն</b></td>
+            </tr>
+            <tr>
+              <td><b>Քննության տեսակը</b></td>
+              <td>{{test.testsList.title}}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><b>Արդյունք</b></td>
+              <td>{{(getCorrectAnswerSum() / test.questionsList.length)*100}}%</td>
+              <td>{{test.testsList.percent}}%</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td><br></td>
+              <td><br></td>
+              <td><br></td>
+              <td><br></td>
+              <td><br></td>
+              <td><br></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td rowspan="2"><b>Ընդամենը հարցերի քանակ, որից</b></td>
+              <td colspan="2" class="text-center"><b>Ճիշտ</b></td>
+              <td rowspan="2" class="text-center"><b>Սխալ</b></td>
+              <td rowspan="2" class="text-center"><b>Չպատասխանված</b></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td><b>Քանակ</b></td>
+              <td><b>տոկոս /ճիշտ պատասխանների տեսակարար կշիռն տվյալ մասնագիտության ընդհանուրի  մեջ</b></td>
+            </tr>
+            <tr *ngFor="let cat of cats | keyvalue; let i = index">
+              <td>{{getCatName(cat.key)}}</td>
+              <td>{{cat.value.length}}</td>
+              <td>{{getCorrectAnswer(cat.value, i)[i]}}</td>
+              <td>{{(getCorrectAnswer(cat.value, i)[i]/cat.value.length)*100}}%</td>
+              <td>{{getWrongAnswer(cat.value, i)[i]}}</td>
+              <td>{{getNoAnswer(cat.value, i)[i]}}</td>
+            </tr>
+            <tr>
+              <td><b>Ընդմանեը</b></td>
+              <td><b>{{test.questionsList.length}}</b></td>
+              <td><b>{{getCorrectAnswerSum()}}</b></td>
+              <td><b>{{(getCorrectAnswerSum() / test.questionsList.length)*100}}%</b></td>
+              <td><b>{{getWrongAnswerSum()}}</b></td>
+              <td><b>{{getNoAnswerSum()}}</b></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 
   <div id="myModal" [ngClass]="modalShowHide ? 'modal-show' : 'modal-hide'" class="modal1">
 

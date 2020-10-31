@@ -5,13 +5,13 @@
         <div class="col-lg-3 col-md-6">
           <div class="uk-footer--col" *ngIf="about">
             <a class="uk-footer--logo" href="">
-              <img src="assets/images/logo-white.svg" alt=""/>
+              <img src="assets/images/logo.svg" alt=""/>
             </a>
-            <h3 class="uk-footer--title">
-              {{about.title}}
-            </h3>
-            <p class="uk-footer--text" [innerHTML]="about.shortDescription">
-            </p>
+<!--            <h3 class="uk-footer&#45;&#45;title">-->
+<!--              {{about.title}}-->
+<!--            </h3>-->
+<!--            <p class="uk-footer&#45;&#45;text" [innerHTML]="about.shortDescription">-->
+<!--            </p>-->
           </div>
         </div>
         <div class="col-lg-4 col-md-6" >
@@ -37,12 +37,12 @@
             </ul>
           </div>
         </div>
-        <div class="col-lg-5 col-md-12">
+        <div class="col-lg-3 col-md-12">
           <div class="uk-footer--col">
             <div class="uk-footer--map">
               <google-map
                 [center]="center"
-                height="500px"
+                height="300px"
                 width="100%">
                 <map-marker
                   *ngFor="let marker of markers"
@@ -64,7 +64,7 @@
     <div class="uk-footer--container">
       <div class="row uk-row align-items-center">
         <div class="col-md-6">
-          <p class="uk-footer--copyright">&copy; 2020 Nahapetyan usumnakan kentron.</p>
+          <p class="uk-footer--copyright">&copy; 2020 Նահապետյան ուսումնական կենտրոն.</p>
         </div>
         <div class="col-md-6">
           <div class="uk-footer--social-parent" *ngIf="contacts && contacts.social">

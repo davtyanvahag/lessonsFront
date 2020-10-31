@@ -14468,6 +14468,7 @@ select {
   }
 
   .uk-menu {
+    display: block;
     flex-flow: column;
     align-items: flex-start;
     width: 100%;
@@ -14497,7 +14498,7 @@ select {
   }
 
   .uk-menu.uk-header--menu-edit {
-    display: flex;
+    display: block;
   }
 
   .uk-menu-divider {
@@ -14661,6 +14662,13 @@ select {
 }
 
 @media (max-width: 767.98px) {
+  .uk-menu {
+    list-style: none;
+    display: block;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
   .table-responsive-md {
     display: block;
     width: 100%;

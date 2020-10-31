@@ -3,7 +3,7 @@
   <section class="uk-section-full">
     <div class="container" *ngIf="singleTest">
       <div class="uk-single-test uk-box-shadow">
-        <div class="uk-single-test--heading">
+        <div class="uk-single-test--heading" style="overflow-wrap: anywhere;">
           <h2 class="uk-single-test--title">
             {{singleTest.title}}
           </h2>
@@ -21,7 +21,7 @@
             </div>
           </div>
         </div>
-        <div class="uk-single-test--content">
+        <div class="uk-single-test--content"  style="overflow-wrap: anywhere;">
           <p [innerHTML]="singleTest.longDescription"></p>
         </div>
       </div>
@@ -30,7 +30,7 @@
       <div class="uk-single-test uk-box-shadow">
         <div class="uk-single-test--heading">
           <h2 class="uk-single-test--title">
-            Տվյալներ չեն գտնվե
+            Տվյալներ չեն գտնվել
           </h2>
         </div>
       </div>

@@ -75,7 +75,7 @@ export class SignInComponent implements OnInit {
       } else {
         this.error.phoneNumber.bool = true;
         if (res.message === 'Invalid credentials') {
-          this.error.phoneNumber.message = 'Համապատասխան տվյալներով օգտատեր չի գտնվե';
+          this.error.phoneNumber.message = 'Համապատասխան տվյալներով օգտատեր չի գտնվել';
         } else {
           this.error.phoneNumber.message = 'Առկա են Տեխնիկական կամ նունականացման խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
         }
