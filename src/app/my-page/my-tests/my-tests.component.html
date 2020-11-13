@@ -29,11 +29,14 @@
                 {{order.finishDate ? (order.finishDate | date: 'MM/dd/yyyy HH:mm') : '-'}}
               </div>
             </div>
-            <div class="uk-tests--more col-30">
-              <a class="btn btn-primary btn-block" [routerLink]="['/my-page/my-tests/single/', order._id]" *ngIf="order.participated === 1">Սկսել</a>
-              <a class="btn btn-secondary btn-block" href="javascript:void(0)" (click)=" getCurrentOrder(order._id)" *ngIf="order.participated === 3" >Դիտել</a>
-              <a class="btn btn-secondary btn-block" href="javascript:void(0)" (click)=" getCurrentOrder1(order._id)" *ngIf="order.participated === 3" >
+            <div class="uk-tests--more col-30  text-center">
+              <a class="btn btn-primary btn-block mb-1" [routerLink]="['/my-page/my-tests/single/', order._id]" *ngIf="order.participated === 1">Սկսել</a>
+              <a class="btn btn-secondary btn-block mb-1" href="javascript:void(0)" (click)=" getCurrentOrder(order._id)" *ngIf="order.participated === 3" >Դիտել</a>
+              <a class="btn btn-secondary btn-inline-block mr-1" style="padding: 0.5rem 1.175rem;" href="javascript:void(0)" (click)=" getCurrentOrder1(order._id)" *ngIf="order.participated === 3" >
                 <i class="fa fa-eye"></i>
+              </a>
+              <a class="btn btn-secondary btn-inline-block" style="padding: 0.5rem 1.175rem;" href="javascript:void(0)" (click)="deleteOrderModal = true; orderId = order._id">
+                <i class="fa fa-trash"></i>
               </a>
             </div>
           </div>
@@ -55,7 +58,25 @@
     </div>
     <div class="row uk-row"  *ngIf="!orders || orders.length === 0">
       <div class="col-12">
-        <p>Տվյալներ չեն գտնվե</p>
+        <p>Տվյալներ չեն գտնվել</p>
+      </div>
+    </div>
+  </div>
+
+<!--  delete modal-->
+  <div id="myModal0" [ngClass]="deleteOrderModal ? 'modal-show' : 'modal-hide'" class="modal1">
+    <div class="modal-content modal-sm">
+      <div class="modal-header clearfix  bg-light">
+        <span class="close" (click)="deleteOrderModal = false">&times;</span>
+      </div>
+      <div class="modal-body border-top bg-light x-scroll">
+        <div class="row no-margin">
+          <h3 class="text-danger text-center">{{deleteMessage}}</h3>
+        </div>
+      </div>
+      <div class="modal-footer text-right  border-top p-2">
+        <button class="btn btn-secondary"  (click)="deleteOrderModal = false">Ոչ</button>
+        <button class="btn btn-danger"  (click)="modalShowHide = false; deleteOrder()">Այո</button>
       </div>
     </div>
   </div>
@@ -64,11 +85,11 @@
 <!--  hashvetvutyun modal-->
   <div id="myModal1" [ngClass]="modalShowHide1 ? 'modal-show' : 'modal-hide'" class="modal1">
     <div class="modal-content">
-      <div class="modal-header clearfix">
+      <div class="modal-header clearfix  bg-light">
         <span class="close" (click)="modalShowHide1 = false">&times;</span>
       </div>
-      <div class="modal-body border-top" *ngIf="test">
-        <div class="row">
+      <div class="modal-body border-top bg-light x-scroll" *ngIf="test">
+        <div class="row no-margin">
           <table class="table table-bordered">
             <tr>
               <td colspan="6" class="text-center"><b>Հաշվետվություն</b></td>
@@ -113,7 +134,7 @@
               <td>{{getCatName(cat.key)}}</td>
               <td>{{cat.value.length}}</td>
               <td>{{getCorrectAnswer(cat.value, i)[i]}}</td>
-              <td>{{(getCorrectAnswer(cat.value, i)[i]/cat.value.length)*100}}%</td>
+              <td>{{((getCorrectAnswer(cat.value, i)[i]/cat.value.length)*100).toFixed(2)}}%</td>
               <td>{{getWrongAnswer(cat.value, i)[i]}}</td>
               <td>{{getNoAnswer(cat.value, i)[i]}}</td>
             </tr>
@@ -121,7 +142,7 @@
               <td><b>Ընդմանեը</b></td>
               <td><b>{{test.questionsList.length}}</b></td>
               <td><b>{{getCorrectAnswerSum()}}</b></td>
-              <td><b>{{(getCorrectAnswerSum() / test.questionsList.length)*100}}%</b></td>
+              <td><b>{{((getCorrectAnswerSum() / test.questionsList.length)*100).toFixed(2)}}%</b></td>
               <td><b>{{getWrongAnswerSum()}}</b></td>
               <td><b>{{getNoAnswerSum()}}</b></td>
             </tr>

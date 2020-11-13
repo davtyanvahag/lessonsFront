@@ -108,18 +108,27 @@ export class SingleComponent implements OnInit {
     // console.log(index, answerIndex, this.answersCkecked);
     const index = this.test.questions.findIndex(el => el.q_id === id);
 
-    this.test.questions[index].user_answer_index = answerIndex;
-    this.answerd[ind] = true;
+    // this.test.questions[index].user_answer_index = answerIndex;
+    if (this.test.questions[index].user_answer_index === answerIndex) {
+      this.test.questions[index].user_answer_index = -1;
+      this.answerd[ind] = false;
+    } else {
+      this.test.questions[index].user_answer_index = answerIndex;
+      this.answerd[ind] = true;
+    }
     // for (let i = 0; i < this.answersCkecked.length; i++) {
       for (let j = 0; j < this.answersCkecked[ind].length; j++) {
         if ( answerIndex === j)  {
-          this.answersCkecked[ind][j].bool = true;
+          if (this.answersCkecked[ind][j].bool) {
+            this.answersCkecked[ind][j].bool = false;
+          } else {
+            this.answersCkecked[ind][j].bool = true;
+          }
         } else {
           this.answersCkecked[ind][j].bool = false;
         }
       }
     // }
-    console.log('verj ::', ind, answerIndex, this.answersCkecked);
 
   }
 

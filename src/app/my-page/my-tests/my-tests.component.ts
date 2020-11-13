@@ -11,6 +11,8 @@ import {environment} from '../../../environments/environment';
 export class MyTestsComponent implements OnInit {
   activeIndex: number;
   backendUrl: string;
+  orderId: string;
+  deleteMessage: string;
   cats: any;
   page: number;
   limit: number;
@@ -22,6 +24,7 @@ export class MyTestsComponent implements OnInit {
   noAnswersSum: number;
   modalShowHide: boolean;
   modalShowHide1: boolean;
+  deleteOrderModal: boolean;
   orders: any;
   noAnswer: any;
   correctAnswer: any;
@@ -33,6 +36,7 @@ export class MyTestsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.deleteMessage = 'Վստահե՞ք, որ ուզում եք ջնջել!!!';
     this.allAnswersSum = 0;
     this.correctAnswersSum = 0;
     this.answersSumPerc = 0;
@@ -44,6 +48,7 @@ export class MyTestsComponent implements OnInit {
     this.backendUrl = environment.apiUrl;
     this.activeIndex = 0;
     this.modalShowHide = false;
+    this.deleteOrderModal = false;
     this.modalShowHide1 = false;
     this.page = 1;
     this.limit = 6;
@@ -72,6 +77,18 @@ export class MyTestsComponent implements OnInit {
   prev(): void {
     this.page--;
     this.getMyTests();
+  }
+
+  deleteOrder() {
+    this.myTestsService.delete(this.orderId).subscribe((res: any) => {
+      if (!res.error) {
+        this.deleteMessage = 'Ջնջված է';
+
+        setTimeout(() => { this.getMyTests(); this.deleteOrderModal = false; }, 1500);
+      } else {
+        this.deleteMessage = 'Առկա են խնդիրներ, խնդրում ենք կապնվել օպերատորի հետ';
+      }
+    });
   }
 
   getCurrentOrder(id) {

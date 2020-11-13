@@ -35,6 +35,14 @@ export class MyTestsService {
     );
   }
 
+  delete(id) {
+    const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
+    return this.http.delete(`${environment.apiUrl}`  + '/orders/deleteforUser/' + id, { headers: headers }).pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
   answerUpdate(obj) {
     const headers = new HttpHeaders({'Content-Type': 'application/json', 'token': localStorage.getItem('token')});
     return this.http.post(`${environment.apiUrl}`  + '/orders/answerUpdate/', obj, { headers: headers }).pipe(

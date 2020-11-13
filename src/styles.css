@@ -7,6 +7,14 @@
   padding: 40px 0;
 }
 
+.no-margin {
+  margin: 0!important;
+}
+
+.modal-sm{
+  width: 28%!important;
+}
+
 .color-green{
   color: rgba(26, 147, 17, 0.88)!important;
 }
@@ -118,6 +126,10 @@ input[type="date"]
 
   .uk-menu {
     display: block;
+  }
+
+  .x-scroll {
+    overflow-x: scroll;
   }
 }
 
