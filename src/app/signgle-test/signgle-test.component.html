@@ -9,7 +9,7 @@
           </h2>
           <div class="uk-single-test--heading-info">
             <div class="uk-single-test--heading-info-part pr-2">
-              Գինը: {{singleTest.price > 0 ? singleTest.price + ' Դրամ' : 'Անվճար'}}
+              Գինը: {{singleTest.price > 0 ? singleTest.price.toLocaleString() + ' Դրամ' : 'Անվճար'}}
             </div>
             <div class="uk-single-test--heading-info-part">
               <a class="btn btn-primary" *ngIf="singleTest.price > 0" href="javascript:void(0)" (click)="order(1)">

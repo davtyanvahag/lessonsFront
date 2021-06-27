@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MyTestsService} from './my-tests.service';
 import {SharedService} from '../../shared/shared.service';
 import {environment} from '../../../environments/environment';
+import {AccountService} from '../edit-my-account/account.service';
 
 @Component({
   selector: 'app-my-tests',
@@ -28,9 +29,11 @@ export class MyTestsComponent implements OnInit {
   orders: any;
   noAnswer: any;
   correctAnswer: any;
+  user: any;
   wrongAnswer: any;
   test: any;
   constructor(private myTestsService: MyTestsService,
+              private accountService: AccountService,
               private sharedService: SharedService) {
     this.sharedService.hasSideBarStatus(true);
   }
@@ -53,6 +56,11 @@ export class MyTestsComponent implements OnInit {
     this.page = 1;
     this.limit = 6;
     this.getMyTests();
+    this.accountService.getCurrenUser().subscribe( (res: any) => {
+      if (!res.error) {
+        this.user = res.user;
+      }
+    });
   }
 
   getMyTests() {
@@ -188,7 +196,7 @@ export class MyTestsComponent implements OnInit {
     obj.forEach((el1) => {
       this.test.questions.forEach(el2 => {
         if (el2.q_id === el1._id) {
-          if (el2.user_answer_index !== el2.answer_index) {
+          if (el2.user_answer_index !== el2.answer_index && el2.user_answer_index !== -1) {
             this.wrongAnswer[i] += 1;
             this.wrongAnswersSum += this.wrongAnswer[i] ;
           }

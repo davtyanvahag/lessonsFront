@@ -37,7 +37,6 @@ export class AccountService {
   }
 
   getCurrenUser() {
-    console.log(localStorage.getItem('token'))
     const headers = new HttpHeaders({'Content-Type': 'application/json', token: localStorage.getItem('token')});
     return this.http.get(environment.apiUrl + '/users/getCurrentUser', {headers: headers}).pipe(
       retry(1),

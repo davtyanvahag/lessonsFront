@@ -104,11 +104,11 @@
             </tr>
             <tr>
               <td><b>Արդյունք</b></td>
-              <td>{{(getCorrectAnswerSum() / test.questionsList.length)*100}}%</td>
-              <td>{{test.testsList.percent}}%</td>
+              <td>{{((getCorrectAnswerSum() / test.questionsList.length)*100).toFixed(2)}}%</td>
+              <td>{{test.testsList.percent.toFixed(2)}}%</td>
+              <td>{{user.firstName}} {{user.lastName}}</td>
               <td></td>
-              <td></td>
-              <td></td>
+              <td>{{test.finishDate | date: 'MM/dd/yyyy'}}</td>
             </tr>
             <tr>
               <td><br></td>

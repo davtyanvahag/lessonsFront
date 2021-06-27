@@ -103,6 +103,11 @@ input[type="date"]
 }
 
 
+@media (max-width: 968px) {
+  .modal-sm{
+    width: 85%!important;
+  }
+}
 @media (max-width: 1023.98px) {
 
   .uk-header {

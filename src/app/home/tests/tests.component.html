@@ -21,7 +21,7 @@
                 Արժեքը
               </span>
               <span class="uk-tests--price-text">
-                {{test.price > 0 ? test.price + ' Դրամ' : 'Անվճար'}}
+                {{test.price > 0 ? test.price.toLocaleString() + ' Դրամ' : 'Անվճար'}}
               </span>
             </div>
           </div>
